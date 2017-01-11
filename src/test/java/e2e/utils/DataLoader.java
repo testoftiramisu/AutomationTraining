@@ -1,4 +1,4 @@
-package utils;
+package e2e.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,38 +11,9 @@ public final class DataLoader {
 
     private static Properties properties = null;
 
-    public static String getEmail() {
-        return getProperty("email");
+    public static String getSeleniumVersion() {
+        return getProperty("seleniumVersion");
     }
-
-    public static String getPassword() {
-        return getProperty("password");
-    }
-
-    public static String getName() {
-        return getProperty("name");
-    }
-
-    public static String getLastName() {
-        return getProperty("lastName");
-    }
-
-    public static String getCompany() {
-        return getProperty("company");
-    }
-
-    public static String getloginURL() {
-        return getProperty("loginURL");
-    }
-
-    public static String getAccessToken() {
-        return getProperty("accessToken");
-    }
-
-    public static String getSettingsLeadsStatusURL() {
-        return getProperty("settingsLeadsStatusURL");
-    }
-
 
     private static String getProperty(String property) {
         if (properties == null) {

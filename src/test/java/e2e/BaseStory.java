@@ -1,11 +1,11 @@
 package e2e;
 
 import com.google.common.util.concurrent.MoreExecutors;
+import e2e.utils.DataLoader;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.annotations.AfterStory;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.configuration.Configuration;
-import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
@@ -36,7 +36,8 @@ public class BaseStory extends JUnitStories {
 
     private static File CurrentPath = new File("");
     private static final File PROJECT_PATH = new File(CurrentPath.getAbsolutePath());
-    private static final String CHROME_DRIVER_PATH = "/utils/2.27/chromedriver.exe";
+    private static final String SELENIUM_VERSION = DataLoader.getSeleniumVersion();
+    private static final String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver.exe";
 
     private WebDriverProvider driverProvider = new PropertyWebDriverProvider();
     private WebDriverSteps lifecycleSteps = new PerStoriesWebDriverSteps(driverProvider);
@@ -119,12 +120,6 @@ public class BaseStory extends JUnitStories {
     protected List<String> storyPaths() {
         return new StoryFinder()
                 .findPaths(codeLocationFromClass(this.getClass()).getFile(), asList("**/*.story"), null);
-    }
-
-    public static class SameThreadEmbedder extends Embedder {
-        public SameThreadEmbedder() {
-            useExecutorService(MoreExecutors.sameThreadExecutor());
-        }
     }
 }
 

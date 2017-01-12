@@ -1,4 +1,4 @@
-package e2e.pages.steps;
+package e2e.steps;
 
 import e2e.components.Dish;
 import e2e.pages.Page;

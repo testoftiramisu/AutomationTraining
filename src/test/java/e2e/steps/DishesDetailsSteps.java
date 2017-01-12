@@ -1,4 +1,4 @@
-package e2e.pages.steps;
+package e2e.steps;
 
 import e2e.components.Dish;
 import e2e.pages.Page;
@@ -18,8 +18,7 @@ public class DishesDetailsSteps extends Page {
         super(browser);
     }
 
-    @Given("I would like to eat Japanese food")
-    public void login() {}
+
 
     @Given("next dishes are added to a cart: $dishesInfo")
     @When("I add next dishes to a cart: $dishesInfo")

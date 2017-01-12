@@ -1,4 +1,4 @@
-package e2e.utils;
+package utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +11,12 @@ public final class DataLoader {
 
     private static Properties properties = null;
 
-    public static String getSeleniumVersion() {
-        return getProperty("seleniumVersion");
+    public static String getWebDriverVersion() {
+        return getProperty("webDriverVersion");
+    }
+
+    public static String getLandingURL() {
+        return getProperty("landingURL");
     }
 
     private static String getProperty(String property) {

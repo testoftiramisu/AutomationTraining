@@ -1,8 +1,10 @@
 package e2e.stories;
 
 import e2e.steps.BasicSteps;
+import e2e.steps.DishesDetailsSteps;
+import e2e.steps.DishesSelectionSteps;
+import e2e.steps.OrderSteps;
 import org.jbehave.core.annotations.AfterStory;
-import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.embedder.StoryControls;
 import org.jbehave.core.failures.FailingUponPendingStep;
@@ -14,10 +16,8 @@ import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.CrossReference;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
-import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
-import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.web.selenium.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,7 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.jbehave.core.reporters.Format.*;
+import static org.jbehave.core.reporters.Format.CONSOLE;
 import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
 public class BaseStory extends JUnitStories {
@@ -66,7 +66,6 @@ public class BaseStory extends JUnitStories {
             .withFormats(formats)
             .withCrossReference(crossReference);
 
-
     public BaseStory() {
         configuredEmbedder().embedderControls();
     }
@@ -87,11 +86,6 @@ public class BaseStory extends JUnitStories {
         browser.manage().window().maximize();
     }
 
-    @BeforeStory
-    public final void beforeStory() throws Exception {
-
-    }
-
     @Before
     public final void clean() throws IOException {
         try {
@@ -104,7 +98,6 @@ public class BaseStory extends JUnitStories {
         } catch (Exception ex) {
         }
     }
-
 
     @AfterStory
     public final void afterStory() throws Exception {
@@ -130,7 +123,12 @@ public class BaseStory extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new BasicSteps());
+        return new InstanceStepsFactory(configuration(),
+                new BasicSteps(),
+                new DishesDetailsSteps(),
+                new DishesSelectionSteps(),
+                new OrderSteps()
+        );
     }
 
     public final void setStory(String story) {

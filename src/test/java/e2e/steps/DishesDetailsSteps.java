@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Anatolii_Hanziuk on 1/11/2017.
  */
-public class DishesDetailsSteps extends BaseStory {
+public class DishesDetailsSteps {
 
     @Given("next dishes are added to a cart: $dishesInfo")
     @When("I add next dishes to a cart: $dishesInfo")

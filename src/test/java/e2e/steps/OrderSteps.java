@@ -5,6 +5,7 @@ import e2e.components.Dish;
 import e2e.pages.PageFactory;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.openqa.selenium.WebDriver;
 
 
 import java.util.List;
@@ -14,12 +15,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by Anatolii_Hanziuk on 1/11/2017.
  */
-public class OrderSteps extends BaseStory{
+public class OrderSteps {
 
-    private PageFactory pageFactory = new PageFactory(getBrowser());
+    private WebDriver browser = BaseStory.getBrowser();
+
+    private PageFactory pageFactory = new PageFactory(browser);
 
     @When("I view order details")
-    public void getOrderDetails() {}
+    public void getOrderDetails() {
+    }
 
     @When("I change quantity of $dishName to $dishQuantity")
     public void setDishQuantity(String dishName, String dishQuantity) {
@@ -42,5 +46,6 @@ public class OrderSteps extends BaseStory{
     }
 
     @Then("next dishes should be included to an order: $dishesInfo")
-    public void verifyDishesInOrder(List<Dish> dishesInfo) {}
+    public void verifyDishesInOrder(List<Dish> dishesInfo) {
+    }
 }

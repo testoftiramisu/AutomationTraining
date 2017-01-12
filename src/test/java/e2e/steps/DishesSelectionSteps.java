@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Anatolii_Hanziuk on 1/11/2017.
  */
-public class DishesSelectionSteps extends BaseStory {
+public class DishesSelectionSteps {
 
     @Given("I would like to eat Japanese food")
     public void login() {

@@ -1,13 +1,11 @@
 package e2e.steps;
 
-import e2e.BaseStory;
+import e2e.stories.BaseStory;
 import e2e.components.Dish;
-import e2e.pages.Order;
-import e2e.pages.Page;
 import e2e.pages.PageFactory;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.openqa.selenium.WebDriver;
+
 
 import java.util.List;
 

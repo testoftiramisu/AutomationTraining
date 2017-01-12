@@ -1,6 +1,6 @@
 package e2e.stories;
 
-import com.google.common.util.concurrent.MoreExecutors;
+import e2e.steps.BasicSteps;
 import org.jbehave.core.annotations.AfterStory;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.configuration.Configuration;
@@ -15,6 +15,7 @@ import org.jbehave.core.reporters.CrossReference;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.CandidateSteps;
+import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.web.selenium.*;
@@ -22,7 +23,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.DataLoader;
@@ -54,8 +54,8 @@ public class BaseStory extends JUnitStories {
 
     private ContextView contextView = new LocalFrameContextView().sized(500, 100);
     private SeleniumContext seleniumContext = new SeleniumContext();
-    private SeleniumStepMonitor stepMonitor = new SeleniumStepMonitor(contextView, seleniumContext,
-            crossReference.getStepMonitor());
+    private SeleniumStepMonitor stepMonitor =
+            new SeleniumStepMonitor(contextView, seleniumContext, crossReference.getStepMonitor());
 
     private Format[] formats = new Format[]{new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML};
     private StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
@@ -82,12 +82,14 @@ public class BaseStory extends JUnitStories {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        browser = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+        browser.manage().window().maximize();
     }
 
     @BeforeStory
     public final void beforeStory() throws Exception {
-        browser = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
-        browser.manage().window().maximize();
+
     }
 
     @Before
@@ -127,8 +129,8 @@ public class BaseStory extends JUnitStories {
     }
 
     @Override
-    public final List<CandidateSteps> candidateSteps() {
-        return new InstanceStepsFactory(configuration(), this).createCandidateSteps();
+    public InjectableStepsFactory stepsFactory() {
+        return new InstanceStepsFactory(configuration(), new BasicSteps());
     }
 
     public final void setStory(String story) {

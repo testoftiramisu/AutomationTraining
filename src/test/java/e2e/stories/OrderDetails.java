@@ -12,8 +12,8 @@ public class OrderDetails extends BaseStory {
         setStory("**/OrderDetails.story");
     }
 
-    @Given("I would like to eat Japanese food")
-    public void login() {
-        getBrowser().get(landingURL);
-    }
+//    @Given("I would like to eat Japanese food")
+//    public void login() {
+//        getBrowser().get(landingURL);
+//    }
 }

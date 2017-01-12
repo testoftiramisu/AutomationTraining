@@ -5,11 +5,11 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
-def selenium = "3.0.1"
+def selenium = "2.49.0"
 def assertj = "3.6.1"
 def jbehave = "4.1"
 def junit = "4.11"
-def jehavewebselenium = "3.5.5"
+def jehaveweb = "3.5.5"
 
 repositories {
     mavenCentral()
@@ -20,7 +20,7 @@ dependencies {
     compile "org.assertj:assertj-core:" + assertj
     compile "org.jbehave:jbehave-core:" + jbehave
     testCompile "org.seleniumhq.selenium:selenium-java:" + selenium
-    compile "org.jbehave.web:jbehave-web-selenium:" + jehavewebselenium
+    compile "org.jbehave.web:jbehave-web-selenium:" + jehaveweb
 }
 
 test {

@@ -6,3 +6,18 @@ so then I
 Scenario: Create new Lead and set custom status
 Given user navigates to Main page
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.DataLoader;
@@ -44,43 +45,30 @@ public class BaseStory extends JUnitStories {
     private static final String SELENIUM_VERSION = DataLoader.getWebDriverVersion();
     private static final String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver.exe";
 
-
-    private WebDriverProvider driverProvider = new PropertyWebDriverProvider();
-    private WebDriverSteps lifecycleSteps = new PerStoriesWebDriverSteps(driverProvider);
-
     private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
-    private ContextView contextView = new LocalFrameContextView().sized(500, 100);
-    private SeleniumContext context = new SeleniumContext();
-    private SeleniumStepMonitor stepMonitor = new SeleniumStepMonitor(contextView, context, new SilentStepMonitor());
-
     private CrossReference crossReference = new CrossReference()
             .withJsonOnly()
             .withPendingStepStrategy(pendingStepStrategy)
             .withOutputAfterEachStory(true)
             .excludingStoriesWithNoExecutedScenarios(true);
 
-    private Format[] formats = new Format[]{new SeleniumContextOutput(context), CONSOLE, WEB_DRIVER_HTML};
+    private ContextView contextView = new LocalFrameContextView().sized(500, 100);
+    private SeleniumContext seleniumContext = new SeleniumContext();
+    private SeleniumStepMonitor stepMonitor = new SeleniumStepMonitor(contextView, seleniumContext,
+            crossReference.getStepMonitor());
+
+    private Format[] formats = new Format[]{new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML};
     private StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
             .withCodeLocation(CodeLocations.codeLocationFromClass(BaseStory.class))
             .withFailureTrace(true)
-            .withFailureTraceCompression(true).withDefaultFormats().withFormats(formats)
+            .withFailureTraceCompression(true)
+            .withDefaultFormats()
+            .withFormats(formats)
             .withCrossReference(crossReference);
 
 
-    public static WebDriver getBrowser() {
-        return browser;
-    }
-
     public BaseStory() {
-        if (lifecycleSteps instanceof PerStoriesWebDriverSteps) {
-            configuredEmbedder().useExecutorService(MoreExecutors.sameThreadExecutor());
-        }
-    }
-
-    @BeforeStory
-    public final void beforeStory() throws Exception {
-        browser = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
-        browser.manage().window().maximize();
+        configuredEmbedder().embedderControls();
     }
 
     @BeforeClass
@@ -96,6 +84,12 @@ public class BaseStory extends JUnitStories {
         }
     }
 
+    @BeforeStory
+    public final void beforeStory() throws Exception {
+        browser = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+        browser.manage().window().maximize();
+    }
+
     @Before
     public final void clean() throws IOException {
         try {
@@ -108,6 +102,7 @@ public class BaseStory extends JUnitStories {
         } catch (Exception ex) {
         }
     }
+
 
     @AfterStory
     public final void afterStory() throws Exception {
@@ -123,7 +118,7 @@ public class BaseStory extends JUnitStories {
 
     @Override
     public final Configuration configuration() {
-        return new SeleniumConfiguration().useSeleniumContext(context)
+        return new SeleniumConfiguration().useSeleniumContext(seleniumContext)
                 .usePendingStepStrategy(pendingStepStrategy)
                 .useStoryControls(new StoryControls().doResetStateBeforeScenario(false))
                 .useStepMonitor(stepMonitor)
@@ -138,6 +133,10 @@ public class BaseStory extends JUnitStories {
 
     public final void setStory(String story) {
         this.storyPath = story;
+    }
+
+    public static WebDriver getBrowser() {
+        return browser;
     }
 }
 

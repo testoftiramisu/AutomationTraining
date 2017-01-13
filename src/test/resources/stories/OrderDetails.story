@@ -14,7 +14,7 @@ Then next dishes should be included to an order:
 |Sashimi Salad|       1|   12|
 |Edamame      |       1|    4|
 |Shiromi      |       1|  9.5|
-And total order price should be equal to 23.5
+And total order price should be equal to 25.5
 
 Scenario: Change quantity of added dishes
 

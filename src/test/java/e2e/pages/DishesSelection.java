@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.PriceConverter;
 
 import java.util.List;
 
@@ -41,7 +42,6 @@ public class DishesSelection extends BasePage {
     }
 
     public void addDishToCart(String dishName) {
-
         WebElement selectedDish = null;
         for (WebElement dish : dishes) {
             if (dish.getText().equalsIgnoreCase(dishName)) {
@@ -63,7 +63,7 @@ public class DishesSelection extends BasePage {
     }
 
     public double getTotalPrice() {
-        return Double.parseDouble(totalPrice.getText().replace("$",""));
+        return PriceConverter.getTotalPriceAsDouble(totalPrice);
     }
 
     public boolean isTotalPricePresent() {

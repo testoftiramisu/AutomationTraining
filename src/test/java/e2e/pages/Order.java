@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.PriceConverter;
 
 import java.util.List;
 
@@ -41,28 +42,30 @@ public class Order extends BasePage {
     }
 
     public double calculateTotalOrderPrice() {
-        return dishPrices.stream().mapToDouble(price -> Double.parseDouble(price.getText())).sum();
+        return dishPrices.stream().mapToDouble(price -> PriceConverter.getTotalPriceAsDouble(price)).sum();
     }
 
     public boolean dishIsPresentInOrder(String dishName) {
-        for (WebElement dish : dishNames) {
-            if (dish.getText().equalsIgnoreCase(dishName)) {
-                return true;
-            }
-        }
-        return false;
+
+        return dishNames.stream().filter(dish -> dish.getText().equalsIgnoreCase(dishName)).count() == 1 ? true : false;
+//        for (WebElement dish : dishNames) {
+//            if (dish.getText().equalsIgnoreCase(dishName)) {
+//                return true;
+//            }
+//        }
+//        return false;
     }
 
     public double getTotalOrderPrice() {
-        return Double.parseDouble(totalPrice.getText());
+        return PriceConverter.getTotalPriceAsDouble(totalPrice);
     }
 
     public double getDishPrice(String dishName) {
-        return Double.parseDouble(dishPrices.get(getDishIndexByDishName(dishName)).getText());
+        return PriceConverter.getTotalPriceAsDouble((WebElement) dishPrices.get(getDishIndexByDishName(dishName)));
     }
 
     public double getDishQuantity(String dishName) {
-        return Double.parseDouble(dishQuantities.get(getDishIndexByDishName(dishName)).getText());
+        return Double.parseDouble(dishQuantities.get(getDishIndexByDishName(dishName)).getAttribute("title"));
     }
 
     public void setDishQuantity(String quantity, String dishName) {

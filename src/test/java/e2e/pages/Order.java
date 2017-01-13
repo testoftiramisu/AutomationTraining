@@ -27,7 +27,6 @@ public class Order extends BasePage {
     @FindBy(className = "order-now")
     private WebElement orderNowButton;
 
-
     public Order(WebDriver browser) {
         super(browser);
         PageFactory.initElements(browser, this);

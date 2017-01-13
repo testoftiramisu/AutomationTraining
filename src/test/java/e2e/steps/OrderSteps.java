@@ -11,13 +11,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Created by Anatolii_Hanziuk on 1/11/2017.
- */
 public class OrderSteps {
 
     private WebDriver browser = BaseStory.getBrowser();
-
     private PageInitializer pageFactory = new PageInitializer(browser);
 
     @When("I view order details")

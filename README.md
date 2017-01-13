@@ -4,10 +4,11 @@ This project is meant for educational purposes only.
 
 #### Dependencies 
 
-    assertj: 3.6.1
-    jbehave: 4.1
-    junit: 4.11
-    selenium-java: 3.0.1
+    selenium = "2.49.0"
+    assertj = "3.6.1"
+    jbehave = "4.0.5"
+    junit = "4.11"
+    jehaveWebSelenium = "3.5.5"
 
 #### System requirements 
 

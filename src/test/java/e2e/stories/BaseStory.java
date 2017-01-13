@@ -46,13 +46,11 @@ public class BaseStory extends JUnitStories {
     private static final String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver.exe";
 
     private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
-    private CrossReference crossReference = new CrossReference()
-            .withJsonOnly()
-            .withPendingStepStrategy(pendingStepStrategy)
-            .withOutputAfterEachStory(true)
-            .excludingStoriesWithNoExecutedScenarios(true);
+    private CrossReference crossReference = new CrossReference().withJsonOnly();
 
-    private ContextView contextView = new LocalFrameContextView().sized(500, 100);
+    private ContextView contextView = new LocalFrameContextView()
+            .sized(500, 100)
+            .located(60, 60);
     private SeleniumContext seleniumContext = new SeleniumContext();
     private SeleniumStepMonitor stepMonitor =
             new SeleniumStepMonitor(contextView, seleniumContext, crossReference.getStepMonitor());
@@ -131,7 +129,7 @@ public class BaseStory extends JUnitStories {
         );
     }
 
-    public final void setStory(String story) {
+    final void setStory(String story) {
         this.storyPath = story;
     }
 

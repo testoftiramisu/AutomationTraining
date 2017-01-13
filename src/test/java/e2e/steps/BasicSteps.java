@@ -1,7 +1,6 @@
 package e2e.steps;
 
 import e2e.stories.BaseStory;
-import org.openqa.selenium.WebDriver;
 import utils.DataLoader;
 import org.jbehave.core.annotations.Given;
 

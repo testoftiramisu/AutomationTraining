@@ -4,14 +4,14 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Page {
+public class BasePage {
     private WebDriver browser;
 
     public final WebDriver getBrowser() {
         return browser;
     }
 
-    public Page(WebDriver browser) {
+    public BasePage(WebDriver browser) {
         this.browser = browser;
         browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         pause();

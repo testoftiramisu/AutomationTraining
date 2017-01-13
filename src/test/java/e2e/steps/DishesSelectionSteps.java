@@ -1,29 +1,30 @@
 package e2e.steps;
 
+import e2e.pages.PageInitializer;
 import e2e.stories.BaseStory;
-import e2e.components.Dish;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
+import org.jbehave.core.steps.Parameters;
+import org.openqa.selenium.WebDriver;
 
-import java.util.List;
-
-/**
- * Created by Anatolii_Hanziuk on 1/11/2017.
- */
 public class DishesSelectionSteps {
 
-    @Given("I would like to eat Japanese food")
-    public void login() {
-    }
+    private WebDriver browser = BaseStory.getBrowser();
+    private PageInitializer pageFactory = new PageInitializer(browser);
 
     @Given("next dishes are added to a cart: $dishesInfo")
     @When("I add next dishes to a cart: $dishesInfo")
-    public void selectDishes(List<Dish> dishesInfo) {
+    public void selectDishes(ExamplesTable dishesInfo) {
+        for (Parameters row : dishesInfo.getRowsAsParameters()) {
+            String dish = row.valueAs("dish name", String.class);
+            pageFactory.getDishesSelectionPage().addDishToCart(dish);
+        }
     }
 
     @Given("I add $dishesQuantity dish to a cart")
-    public void addRandomDishes(int dishesQunatity) {
+    public void addRandomDishes(int dishesQuantity) {
     }
 
     @Given("I would like to view order details")

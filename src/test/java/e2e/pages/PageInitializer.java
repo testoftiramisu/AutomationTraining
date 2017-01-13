@@ -2,15 +2,12 @@ package e2e.pages;
 
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by Anatolii_Hanziuk on 1/12/2017.
- */
-public class PageFactory {
+public class PageInitializer {
 
     private final WebDriver browser;
 
 
-    public PageFactory(WebDriver browser) {
+    public PageInitializer(WebDriver browser) {
         this.browser = browser;
     }
 

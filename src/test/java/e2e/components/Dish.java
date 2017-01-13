@@ -5,9 +5,9 @@ package e2e.components;
  */
 public class Dish {
 
-    private static String dishName;
-    private static int dishQuantity;
-    private static double dishPrice;
+    private String dishName;
+    private int dishQuantity;
+    private double dishPrice;
 
     public Dish(String dishName, int dishQuantity, double dishPrice) {
         this.dishName = dishName;
@@ -15,27 +15,27 @@ public class Dish {
         this.dishPrice = dishPrice;
     }
 
-    public static String getDishName() {
+    public String getDishName() {
         return dishName;
     }
 
-    public static void setDishName(String dishName) {
-        Dish.dishName = dishName;
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
     }
 
-    public static int getDishQuantity() {
+    public int getDishQuantity() {
         return dishQuantity;
     }
 
-    public static void setDishQuantity(int dishQuantity) {
-        Dish.dishQuantity = dishQuantity;
+    public void setDishQuantity(int dishQuantity) {
+        this.dishQuantity = dishQuantity;
     }
 
-    public static double getDishPrice() {
+    public double getDishPrice() {
         return dishPrice;
     }
 
-    public static void setDishPrice(double dishPrice) {
-        Dish.dishPrice = dishPrice;
+    public void setDishPrice(double dishPrice) {
+        this.dishPrice = dishPrice;
     }
 }

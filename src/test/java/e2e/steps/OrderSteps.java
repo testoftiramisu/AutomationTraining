@@ -2,11 +2,10 @@ package e2e.steps;
 
 import e2e.stories.BaseStory;
 import e2e.components.Dish;
-import e2e.pages.PageFactory;
+import e2e.pages.PageInitializer;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.openqa.selenium.WebDriver;
-
 
 import java.util.List;
 
@@ -19,10 +18,11 @@ public class OrderSteps {
 
     private WebDriver browser = BaseStory.getBrowser();
 
-    private PageFactory pageFactory = new PageFactory(browser);
+    private PageInitializer pageFactory = new PageInitializer(browser);
 
     @When("I view order details")
     public void getOrderDetails() {
+        pageFactory.getDishesSelectionPage().checkout();
     }
 
     @When("I change quantity of $dishName to $dishQuantity")

@@ -1,16 +1,13 @@
 package e2e.pages;
 
-import org.junit.FixMethodOrder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-/**
- * Created by Anatolii_Hanziuk on 1/12/2017.
- */
-public class Order extends Page {
+public class Order extends BasePage {
 
     @FindBy(className = "product-name")
     private List<WebElement> dishNames;
@@ -33,10 +30,12 @@ public class Order extends Page {
 
     public Order(WebDriver browser) {
         super(browser);
+        PageFactory.initElements(browser, this);
     }
 
     public void cancelOrder() {
-        cancelOrderButton.click();;
+        cancelOrderButton.click();
+        ;
     }
 
     public void orderNow() {

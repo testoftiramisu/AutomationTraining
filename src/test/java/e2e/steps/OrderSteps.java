@@ -18,12 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OrderSteps {
 
     private WebDriver browser = BaseStory.getBrowser();
-
     private PageFactory pageFactory = new PageFactory(browser);
-
-    @When("I view order details")
-    public void getOrderDetails() {
-    }
 
     @When("I change quantity of $dishName to $dishQuantity")
     public void setDishQuantity(String dishName, String dishQuantity) {

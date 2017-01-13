@@ -30,7 +30,6 @@ public class Order extends Page {
     @FindBy(className = "order-now")
     private WebElement orderNowButton;
 
-
     public Order(WebDriver browser) {
         super(browser);
     }

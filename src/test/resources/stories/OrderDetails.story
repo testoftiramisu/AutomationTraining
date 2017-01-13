@@ -5,7 +5,7 @@ Scenario: Review order details
 Given I would like to eat Japanese food
 And next dishes are added to a cart:
 |dish name    |dish price|
-|Sashimi Salad|        12|
+|Sashimi salad|        12|
 |Edamame      |         4|
 |Shiromi      |       9.5|
 When I view order details

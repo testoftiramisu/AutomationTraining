@@ -19,7 +19,7 @@ public class BasePage {
 
     public final void pause() {
         try {
-            long timeoutInMilliseconds = 3000;
+            long timeoutInMilliseconds = 1000;
             Thread.sleep(timeoutInMilliseconds);
         } catch (InterruptedException e) {
             e.printStackTrace();

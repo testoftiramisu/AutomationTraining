@@ -34,7 +34,6 @@ public class Order extends BasePage {
 
     public void cancelOrder() {
         cancelOrderButton.click();
-        ;
     }
 
     public void orderNow() {
@@ -43,6 +42,15 @@ public class Order extends BasePage {
 
     public double calculateTotalOrderPrice() {
         return dishPrices.stream().mapToDouble(price -> Double.parseDouble(price.getText())).sum();
+    }
+
+    public boolean dishIsPresentInOrder(String dishName) {
+        for (WebElement dish : dishNames) {
+            if (dish.getText().equalsIgnoreCase(dishName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public double getTotalOrderPrice() {
@@ -66,7 +74,14 @@ public class Order extends BasePage {
     }
 
     private int getDishIndexByDishName(String dishName) {
-        return dishNames.indexOf(dishNames.stream().filter(dish -> dish.getText().equals(dishName)));
+        //return dishNames.indexOf(dishNames.stream().filter(dish -> dish.getText().equalsIgnoreCase(dishName)));
+
+        for (WebElement dish : dishNames) {
+            if (dish.getText().equalsIgnoreCase(dishName)) {
+                return dishNames.indexOf(dish);
+            }
+        }
+        return -1;
     }
 
 }

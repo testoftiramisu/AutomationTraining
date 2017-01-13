@@ -1,10 +1,13 @@
 package e2e.steps;
 
+import e2e.pages.Order;
 import e2e.stories.BaseStory;
 import e2e.components.Dish;
 import e2e.pages.PageInitializer;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
+import org.jbehave.core.steps.Parameters;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -42,6 +45,16 @@ public class OrderSteps {
     }
 
     @Then("next dishes should be included to an order: $dishesInfo")
-    public void verifyDishesInOrder(List<Dish> dishesInfo) {
+    public void verifyDishesInOrder(ExamplesTable dishesInfo) {
+        Order orderPage = pageFactory.getOrderPage();
+        for (Parameters row : dishesInfo.getRowsAsParameters()) {
+            String dishName = row.valueAs("item", String.class);
+            Double dishQuantity = row.valueAs("quantity", Double.class);
+            Double dishPrice = row.valueAs("price", Double.class);
+
+            assertThat(orderPage.dishIsPresentInOrder(dishName)).isTrue();
+            assertThat(orderPage.getDishPrice(dishName)).isEqualTo(dishPrice);
+            assertThat(orderPage.getDishQuantity(dishName)).isEqualTo(dishQuantity);
+        }
     }
 }

@@ -42,18 +42,11 @@ public class Order extends BasePage {
     }
 
     public double calculateTotalOrderPrice() {
-        return dishPrices.stream().mapToDouble(price -> PriceConverter.getTotalPriceAsDouble(price)).sum();
+        return dishPrices.stream().mapToDouble(PriceConverter::getTotalPriceAsDouble).sum();
     }
 
     public boolean dishIsPresentInOrder(String dishName) {
-
-        return dishNames.stream().filter(dish -> dish.getText().equalsIgnoreCase(dishName)).count() == 1 ? true : false;
-//        for (WebElement dish : dishNames) {
-//            if (dish.getText().equalsIgnoreCase(dishName)) {
-//                return true;
-//            }
-//        }
-//        return false;
+        return dishNames.stream().filter(dish -> dish.getText().equalsIgnoreCase(dishName)).count() == 1;
     }
 
     public double getTotalOrderPrice() {
@@ -77,8 +70,6 @@ public class Order extends BasePage {
     }
 
     private int getDishIndexByDishName(String dishName) {
-        //return dishNames.indexOf(dishNames.stream().filter(dish -> dish.getText().equalsIgnoreCase(dishName)));
-
         for (WebElement dish : dishNames) {
             if (dish.getText().equalsIgnoreCase(dishName)) {
                 return dishNames.indexOf(dish);
@@ -86,5 +77,5 @@ public class Order extends BasePage {
         }
         return -1;
     }
-
 }
+

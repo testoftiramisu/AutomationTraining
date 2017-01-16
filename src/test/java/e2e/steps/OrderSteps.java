@@ -2,15 +2,12 @@ package e2e.steps;
 
 import e2e.pages.Order;
 import e2e.stories.BaseStory;
-import e2e.components.Dish;
 import e2e.pages.PageInitializer;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.jbehave.core.steps.Parameters;
 import org.openqa.selenium.WebDriver;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

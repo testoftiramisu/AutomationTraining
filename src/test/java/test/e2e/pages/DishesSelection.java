@@ -1,4 +1,4 @@
-package e2e.pages;
+package test.e2e.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;

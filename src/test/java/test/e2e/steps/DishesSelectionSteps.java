@@ -1,7 +1,7 @@
-package e2e.steps;
+package test.e2e.steps;
 
-import e2e.pages.PageInitializer;
-import e2e.stories.BaseStory;
+import test.e2e.pages.PageInitializer;
+import test.e2e.stories.BaseStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;

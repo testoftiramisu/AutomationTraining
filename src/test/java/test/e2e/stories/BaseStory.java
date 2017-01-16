@@ -1,9 +1,9 @@
-package e2e.stories;
+package test.e2e.stories;
 
-import e2e.steps.BasicSteps;
-import e2e.steps.DishesDetailsSteps;
-import e2e.steps.DishesSelectionSteps;
-import e2e.steps.OrderSteps;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import org.jbehave.core.annotations.AfterStory;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.embedder.StoryControls;
@@ -18,25 +18,27 @@ import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
-import org.jbehave.web.selenium.*;
+import org.jbehave.web.selenium.SeleniumConfiguration;
+import org.jbehave.web.selenium.SeleniumContext;
+import org.jbehave.web.selenium.SeleniumContextOutput;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import utils.DataLoader;
+import test.e2e.steps.BasicSteps;
+import test.e2e.steps.DishesDetailsSteps;
+import test.e2e.steps.DishesSelectionSteps;
+import test.e2e.steps.OrderSteps;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
+import utils.DataLoader;
 
 import static org.jbehave.core.reporters.Format.CONSOLE;
 import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
 public class BaseStory extends JUnitStories {
 
-    private static ChromeDriverService service;
     private static WebDriver browser;
     private String storyPath;
 
@@ -48,7 +50,9 @@ public class BaseStory extends JUnitStories {
     private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
     private CrossReference crossReference = new CrossReference().withJsonOnly();
     private SeleniumContext seleniumContext = new SeleniumContext();
-    private Format[] formats = new Format[]{new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML};
+    private Format[] formats = new Format[]{
+            new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML
+    };
 
     private StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
             .withCodeLocation(CodeLocations.codeLocationFromClass(BaseStory.class))
@@ -64,6 +68,7 @@ public class BaseStory extends JUnitStories {
 
     @BeforeClass
     public static void createAndStartService() {
+        ChromeDriverService service;
         try {
             service = new ChromeDriverService.Builder()
                     .usingDriverExecutable(new File(PROJECT_PATH + CHROME_DRIVER_PATH))

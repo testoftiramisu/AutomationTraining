@@ -2,7 +2,7 @@ POC of Java based framework for E2E UI testing of http://demos.telerik.com/kendo
 
 This project is meant for educational purposes only. 
 
-##### Dependencies
+#### Dependencies
 
     selenium = "2.49.0"
     assertj = "3.6.1"
@@ -10,13 +10,13 @@ This project is meant for educational purposes only.
     junit = "4.11"
     jehaveWebSelenium = "3.5.5"
 
-##### System requirements
+#### System requirements
 
 * Java 8
 * Gradle
 * Chrome browser
 
-##### ChromeDriver configuration
+#### ChromeDriver configuration
 
 * Under 'utils' folder create a new directory, with name that match your ChromeDriver version (e.g. "2.27")
 
@@ -29,7 +29,7 @@ This project is meant for educational purposes only.
 
         ChromeDriverVersion = 2.27
 
-##### Running
+#### Running
 
 $ gradle clean test
 

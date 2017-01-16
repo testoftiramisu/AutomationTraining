@@ -1,6 +1,5 @@
 package e2e.pages;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -47,15 +47,9 @@ public class BaseStory extends JUnitStories {
 
     private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
     private CrossReference crossReference = new CrossReference().withJsonOnly();
-
-    private ContextView contextView = new LocalFrameContextView()
-            .sized(500, 100)
-            .located(60, 60);
     private SeleniumContext seleniumContext = new SeleniumContext();
-    private SeleniumStepMonitor stepMonitor =
-            new SeleniumStepMonitor(contextView, seleniumContext, crossReference.getStepMonitor());
-
     private Format[] formats = new Format[]{new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML};
+
     private StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
             .withCodeLocation(CodeLocations.codeLocationFromClass(BaseStory.class))
             .withFailureTrace(true)
@@ -114,7 +108,6 @@ public class BaseStory extends JUnitStories {
         return new SeleniumConfiguration().useSeleniumContext(seleniumContext)
                 .usePendingStepStrategy(pendingStepStrategy)
                 .useStoryControls(new StoryControls().doResetStateBeforeScenario(false))
-                .useStepMonitor(stepMonitor)
                 .useStoryLoader(new LoadFromClasspath(BaseStory.class))
                 .useStoryReporterBuilder(reporterBuilder);
     }

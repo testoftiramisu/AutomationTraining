@@ -1,7 +1,7 @@
 package e2e.pages;
 
-import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,7 +38,7 @@ public class DishesSelection extends BasePage {
     }
 
     public void selectDish(String dishName) {
-        dishes.stream().filter(dish -> dish.getText().equals(dishName)).forEach(dish -> dish.click());
+        dishes.stream().filter(dish -> dish.getText().equals(dishName)).forEach(WebElement::click);
     }
 
     public void addDishToCart(String dishName) {
@@ -85,5 +85,4 @@ public class DishesSelection extends BasePage {
             System.out.println("There are no dishes on a page: " + elementIsNotFound);
         }
     }
-
 }

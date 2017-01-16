@@ -9,13 +9,8 @@ import org.jbehave.core.model.ExamplesTable;
 import org.jbehave.core.steps.Parameters;
 import org.openqa.selenium.WebDriver;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Created by Anatolii_Hanziuk on 1/11/2017.
- */
 public class DishesSelectionSteps {
 
     private WebDriver browser = BaseStory.getBrowser();

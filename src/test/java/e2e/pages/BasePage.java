@@ -14,7 +14,6 @@ public class BasePage {
     public BasePage(WebDriver browser) {
         this.browser = browser;
         browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        pause();
     }
 
     public final void pause() {

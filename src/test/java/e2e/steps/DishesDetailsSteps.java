@@ -13,8 +13,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class DishesDetailsSteps {
 
-    private WebDriver browser = BaseStory.getBrowser();
-    private PageInitializer pageFactory = new PageInitializer(browser);
+    private PageInitializer pageFactory = new PageInitializer(BaseStory.getBrowser());
 
     @Given("I add $dishesQuantity dish to a cart")
     public void addRandomDishes(int dishesQunatity) {}

@@ -13,8 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DishesSelectionSteps {
 
-    private WebDriver browser = BaseStory.getBrowser();
-    private PageInitializer pageFactory = new PageInitializer(browser);
+    private PageInitializer pageFactory = new PageInitializer(BaseStory.getBrowser());
 
     @Given("next dishes are added to a cart: $dishesInfo")
     @When("I add next dishes to a cart: $dishesInfo")

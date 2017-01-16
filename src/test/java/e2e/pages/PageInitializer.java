@@ -6,7 +6,6 @@ public class PageInitializer {
 
     private final WebDriver browser;
 
-
     public PageInitializer(WebDriver browser) {
         this.browser = browser;
     }

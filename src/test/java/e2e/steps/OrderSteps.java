@@ -13,8 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderSteps {
 
-    private WebDriver browser = BaseStory.getBrowser();
-    private PageInitializer pageFactory = new PageInitializer(browser);
+    private PageInitializer pageFactory = new PageInitializer(BaseStory.getBrowser());
 
     @When("I view order details")
     public void getOrderDetails() {

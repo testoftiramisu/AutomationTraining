@@ -62,8 +62,6 @@ public class Order extends BasePage {
     }
 
     public void setDishQuantity(int quantity, String dishName) {
-        /*dishQuantities.get(getDishIndexByDishName(dishName)).getAttribute("title")
-                .replace(Double.toString(getDishQuantity(dishName)), Integer.toString(quantity));*/
         dishQuantities.get(getDishIndexByDishName(dishName)).sendKeys(Integer.toString(quantity));
     }
 

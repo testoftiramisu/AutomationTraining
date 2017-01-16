@@ -16,21 +16,6 @@ Then next dishes should be included to an order:
 |Shiromi      |       1|  9.5|
 And total order price should be equal to 25.5
 
-Scenario: Change quantity of added dishes
-
-Given I would like to eat Japanese food
-And next dishes are added to a cart:
-|dish name    |dish price|
-|Sashimi Salad|        12|
-|Edamame      |         4|
-And I view order details
-When I change quantity of Edamame to 3
-Then next dishes should be included to an order:
-|item         |quantity|price|
-|Sashimi Salad|1       |   12|
-|Edamame      |3       |    4|
-And total order price should be equal to 24
-
 Scenario: Cancel order
 
 Given I would like to eat Japanese food

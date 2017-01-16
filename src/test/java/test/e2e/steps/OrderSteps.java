@@ -1,8 +1,8 @@
-package e2e.steps;
+package test.e2e.steps;
 
-import e2e.pages.Order;
-import e2e.stories.BaseStory;
-import e2e.pages.PageInitializer;
+import test.e2e.pages.Order;
+import test.e2e.stories.BaseStory;
+import test.e2e.pages.PageInitializer;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;

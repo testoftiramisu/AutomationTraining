@@ -1,4 +1,4 @@
-package e2e.stories;
+package test.e2e.stories;
 
 public class OrderDetails extends BaseStory {
 

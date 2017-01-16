@@ -1,6 +1,6 @@
-package e2e.steps;
+package test.e2e.steps;
 
-import e2e.stories.BaseStory;
+import test.e2e.stories.BaseStory;
 import utils.DataLoader;
 import org.jbehave.core.annotations.Given;
 

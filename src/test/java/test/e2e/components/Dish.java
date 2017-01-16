@@ -1,4 +1,4 @@
-package e2e.components;
+package test.e2e.components;
 
 /**
  * Created by Anatolii_Hanziuk on 1/11/2017.

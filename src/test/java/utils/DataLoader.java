@@ -12,7 +12,7 @@ public final class DataLoader {
     private static Properties properties = null;
 
     public static String getWebDriverVersion() {
-        return getProperty("webDriverVersion");
+        return getProperty("ChromeDriverVersion");
     }
 
     public static String getLandingURL() {

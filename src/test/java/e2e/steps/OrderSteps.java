@@ -22,8 +22,8 @@ public class OrderSteps {
     }
 
     @When("I change quantity of $dishName to $dishQuantity")
-    public void setDishQuantity(String dishName, String dishQuantity) {
-        pageFactory.getOrderPage().setDishQuantity(dishName, dishQuantity);
+    public void setDishQuantity(String dishName, int dishQuantity) {
+        pageFactory.getOrderPage().setDishQuantity(dishQuantity, dishName);
     }
 
     @When("I cancel an order")

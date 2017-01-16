@@ -61,8 +61,10 @@ public class Order extends BasePage {
         return Double.parseDouble(dishQuantities.get(getDishIndexByDishName(dishName)).getAttribute("title"));
     }
 
-    public void setDishQuantity(String quantity, String dishName) {
-        dishPrices.get(getDishIndexByDishName(dishName)).sendKeys(quantity);
+    public void setDishQuantity(int quantity, String dishName) {
+        /*dishQuantities.get(getDishIndexByDishName(dishName)).getAttribute("title")
+                .replace(Double.toString(getDishQuantity(dishName)), Integer.toString(quantity));*/
+        dishQuantities.get(getDishIndexByDishName(dishName)).sendKeys(Integer.toString(quantity));
     }
 
     public int getQuantityOfDishes() {

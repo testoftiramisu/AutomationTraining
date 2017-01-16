@@ -15,7 +15,7 @@ public class DishesSelection extends BasePage {
     private List<WebElement> dishes;
 
     @FindBy(xpath = ".//button")
-    private List<WebElement> addToCart;
+    private List<WebElement> addToCartButtons;
 
     @FindBy(id = "checkout")
     private WebElement checkoutButton;
@@ -80,7 +80,7 @@ public class DishesSelection extends BasePage {
 
     public void addRandomDish() {
         try {
-            addToCart.get(0).click();
+            addToCartButtons.get(0).click();
         } catch (NotFoundException elementIsNotFound) {
             System.out.println("There are no dishes on a page: " + elementIsNotFound);
         }

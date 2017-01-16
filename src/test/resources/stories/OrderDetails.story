@@ -23,8 +23,8 @@ And next dishes are added to a cart:
 |dish name    |dish price|
 |Sashimi Salad|        12|
 |Edamame      |         4|
-And I would like to view order details
-When I change quantity of “Edamme” to “3”
+And I view order details
+When I change quantity of Edamame to 3
 Then next dishes should be included to an order:
 |item         |quantity|price|
 |Sashimi Salad|1       |   12|
@@ -38,7 +38,7 @@ And next dishes are added to a cart:
 |dish name    |dish price|
 |Sashimi Salad|        12|
 |Edamame      |         4|
-And I would like to view order details
+And I view order details
 When I cancel an order
 Then cart should be empty
 And total order price should be empty

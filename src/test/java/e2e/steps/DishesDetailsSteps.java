@@ -1,8 +1,11 @@
 package e2e.steps;
 
+import e2e.pages.PageInitializer;
+import e2e.stories.BaseStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.openqa.selenium.WebDriver;
 
 
 /**
@@ -10,11 +13,11 @@ import org.jbehave.core.annotations.When;
  */
 public class DishesDetailsSteps {
 
+    private WebDriver browser = BaseStory.getBrowser();
+    private PageInitializer pageFactory = new PageInitializer(browser);
+
     @Given("I add $dishesQuantity dish to a cart")
     public void addRandomDishes(int dishesQunatity) {}
-
-    @Given("I would like to view order details")
-    public void checkout() {}
 
     @When("I would like to empty cart")
     public void emptyCart() {}

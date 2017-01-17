@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class DishesDetails extends BasePage {
+public class DishDetails extends BasePage {
 
     private String dishParameterValueXpath = ".//*[text()='%s']/following-sibling::dd[1]";
 
@@ -27,7 +27,7 @@ public class DishesDetails extends BasePage {
     @FindBy(id = "navigate-next")
     private WebElement nextDish;
 
-    public DishesDetails(WebDriver browser) {
+    public DishDetails(WebDriver browser) {
         super(browser);
         PageFactory.initElements(browser, this);
     }

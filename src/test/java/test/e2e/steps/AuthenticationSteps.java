@@ -4,7 +4,7 @@ import test.e2e.stories.BaseStory;
 import utils.DataLoader;
 import org.jbehave.core.annotations.Given;
 
-public class BasicSteps {
+public class AuthenticationSteps {
 
     private String landingURL = DataLoader.getLandingURL();
 

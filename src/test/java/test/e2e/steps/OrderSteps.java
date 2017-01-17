@@ -37,7 +37,8 @@ public class OrderSteps {
 
     @Then("total order price should be equal to $orderTotalPrice")
     public void verifyTotalOrderPrice(String orderTotalPrice) {
-        assertThat(Double.parseDouble(orderTotalPrice)).isEqualTo(pageFactory.getOrderPage().calculateTotalOrderPrice());
+        assertThat(Double.parseDouble(orderTotalPrice))
+            .isEqualTo(pageFactory.getOrderPage().calculateTotalOrderPrice());
     }
 
     @Then("next dishes should be included to an order: $dishesInfo")

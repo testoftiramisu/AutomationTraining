@@ -10,8 +10,8 @@ public class PageInitializer {
         this.browser = browser;
     }
 
-    public final DishesDetails getDishesDetailsPage() {
-        return new DishesDetails(browser);
+    public final DishDetails getDishesDetailsPage() {
+        return new DishDetails(browser);
     }
 
     public final DishesSelection getDishesSelectionPage() {

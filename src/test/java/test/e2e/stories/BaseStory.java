@@ -23,7 +23,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import test.e2e.steps.BasicSteps;
+import test.e2e.steps.AuthenticationSteps;
 import test.e2e.steps.DishesDetailsSteps;
 import test.e2e.steps.DishesSelectionSteps;
 import test.e2e.steps.OrderSteps;
@@ -129,7 +129,7 @@ public class BaseStory extends JUnitStories {
     @Override
     public InjectableStepsFactory stepsFactory() {
         return new InstanceStepsFactory(configuration(),
-                new BasicSteps(),
+                new AuthenticationSteps(),
                 new DishesDetailsSteps(),
                 new DishesSelectionSteps(),
                 new OrderSteps()

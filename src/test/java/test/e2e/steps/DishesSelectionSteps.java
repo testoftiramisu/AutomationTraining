@@ -21,7 +21,8 @@ public class DishesSelectionSteps {
         dishesInfo.getRowsAsParameters()
                 .stream()
                 .forEach(row ->
-                        pageFactory.getDishesSelectionPage().addDishToCart(row.valueAs("dish name", String.class)));
+                        pageFactory.getDishesSelectionPage()
+                            .addDishToCart(row.valueAs("dish name", String.class)));
     }
 
     @Given("I add $dishesQuantity dish to a cart")
@@ -47,13 +48,21 @@ public class DishesSelectionSteps {
         assertThat(pageFactory.getDishesSelectionPage().isTotalPricePresent()).isFalse();
     }
 
-    @Then("shopping cart should contain $dishesQuantity {dish|dishes}")
+    @Then("shopping cart should contain $dishesQuantity dishes")
     public void verifyDishesQuantityInCart(int dishesQuantity) {
-        assertThat(pageFactory.getDishesSelectionPage().getDishesInCart().size()).isEqualTo(dishesQuantity);
+        assertThat(pageFactory.getDishesSelectionPage().getDishesInCart().size())
+            .isEqualTo(dishesQuantity);
     }
 
     @Then("cart should be empty")
     public void isEmptyCart() {
-        assertThat(pageFactory.getDishesSelectionPage().isCartPresent()).isFalse();
+        assertThat(pageFactory.getDishesSelectionPage().isCartPresent())
+            .isFalse();
+    }
+
+    @Then("total cart price should be equal to $orderTotalPrice")
+    public void verifyTotalOrderPrice(String orderTotalPrice) {
+        assertThat(Double.parseDouble(orderTotalPrice))
+            .isEqualTo(pageFactory.getDishesSelectionPage().calculateTotalPrice());
     }
 }

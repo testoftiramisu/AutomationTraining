@@ -36,8 +36,8 @@ test {
     exclude '**/BaseStory.class'
 }
 
-task(type: Test, 'bddTest') {
-    description 'Runs the BDD tests'
+task(type: Test, 'e2e') {
+    description 'Runs the E2E tests'
 
     // Use properties for filtering stories
     systemProperty "metaFilters", System.getProperty("filter", "")

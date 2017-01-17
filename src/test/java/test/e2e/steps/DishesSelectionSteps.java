@@ -18,10 +18,10 @@ public class DishesSelectionSteps {
     @Given("next dishes are added to a cart: $dishesInfo")
     @When("I add next dishes to a cart: $dishesInfo")
     public void selectDishes(ExamplesTable dishesInfo) {
-        for (Parameters row : dishesInfo.getRowsAsParameters()) {
-            String dish = row.valueAs("dish name", String.class);
-            pageFactory.getDishesSelectionPage().addDishToCart(dish);
-        }
+        dishesInfo.getRowsAsParameters()
+                .stream()
+                .forEach(row ->
+                        pageFactory.getDishesSelectionPage().addDishToCart(row.valueAs("dish name", String.class)));
     }
 
     @Given("I add $dishesQuantity dish to a cart")

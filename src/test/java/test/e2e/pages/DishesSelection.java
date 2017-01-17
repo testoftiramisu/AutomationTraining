@@ -41,7 +41,7 @@ public class DishesSelection extends BasePage {
         org.openqa.selenium.support.PageFactory.initElements(browser, this);
     }
 
-    public void selectDish(String dishName) {
+    public void viewDishDetails(String dishName) {
         dishes.stream().filter(dish -> dish.getText().equals(dishName)).forEach(WebElement::click);
     }
 
@@ -72,6 +72,15 @@ public class DishesSelection extends BasePage {
         return PriceConverter.getTotalPriceAsDouble(totalPrice);
     }
 
+    public double calculateTotalPrice() {
+        double totalPrice = 0;
+        for (int i = 0; i < dishesInCart.size(); i++) {
+            totalPrice += PriceConverter.getTotalPriceAsDouble(pricesInCart.get(i))
+                    * PriceConverter.getTotalPriceAsDouble(quantitiesInCart.get(i));
+        }
+        return totalPrice;
+    }
+
     public boolean isTotalPricePresent() {
         return totalPrice.isDisplayed();
     }
@@ -92,12 +101,5 @@ public class DishesSelection extends BasePage {
         }
     }
 
-    public double calculateTotalPrice() {
-        double totalPrice = 0;
-        for (int i = 0; i < dishesInCart.size(); i++) {
-            totalPrice += PriceConverter.getTotalPriceAsDouble(pricesInCart.get(i))
-                    * PriceConverter.getTotalPriceAsDouble(quantitiesInCart.get(i));
-        }
-        return totalPrice;
-    }
+
 }

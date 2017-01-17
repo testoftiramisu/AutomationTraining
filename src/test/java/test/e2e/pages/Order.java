@@ -1,5 +1,6 @@
 package test.e2e.pages;
 
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,11 +35,20 @@ public class Order extends BasePage {
     }
 
     public void cancelOrder() {
-        cancelOrderButton.click();
+
+        try {
+            cancelOrderButton.click();
+        } catch (ElementNotVisibleException ex) {
+            System.out.println("Cancel Order button is not visible" + ex);
+        }
     }
 
     public void orderNow() {
-        orderNowButton.click();
+        try {
+            orderNowButton.click();
+        } catch (ElementNotVisibleException ex) {
+            System.out.println("Order Now button is not visible" + ex);
+        }
     }
 
     public double calculateTotalOrderPrice() {

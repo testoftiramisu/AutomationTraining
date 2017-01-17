@@ -1,10 +1,7 @@
 package test.e2e.pages;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import utils.PriceConverter;
 
@@ -55,11 +52,20 @@ public class DishesSelection extends BasePage {
     }
 
     public void checkout() {
-        checkoutButton.click();
+        try {
+            checkoutButton.click();
+        } catch (ElementNotVisibleException ex) {
+            System.out.println("Checkout button is not visible" + ex);
+        }
+
     }
 
     public void emptyCart() {
-        emptyCartButton.click();
+        try {
+            emptyCartButton.click();
+        } catch (ElementNotVisibleException ex) {
+            System.out.println("Empty Cart button is not visible" + ex);
+        }
     }
 
     public double getTotalPrice() {

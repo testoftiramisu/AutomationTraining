@@ -18,7 +18,7 @@ When I add next dishes to a cart:
 |dish name    |dish price|
 |Sashimi Salad|        12|
 |Sashimi Salad|        12|
-Then shopping cart should contain 1 dishes
+Then shopping cart should contain 1 dish
 And total cart price should be equal to 24
 
 Scenario: Empty cart

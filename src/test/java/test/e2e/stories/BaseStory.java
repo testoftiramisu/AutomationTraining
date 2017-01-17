@@ -1,9 +1,19 @@
 package test.e2e.stories;
 
+import static org.jbehave.core.reporters.Format.CONSOLE;
+import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.embedder.StoryControls;
 import org.jbehave.core.failures.FailingUponPendingStep;
+import org.jbehave.core.failures.FailureStrategy;
 import org.jbehave.core.failures.PendingStepStrategy;
+import org.jbehave.core.failures.SilentlyAbsorbingFailure;
 import org.jbehave.core.io.CodeLocations;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryFinder;
@@ -27,14 +37,8 @@ import test.e2e.steps.AuthenticationSteps;
 import test.e2e.steps.DishesDetailsSteps;
 import test.e2e.steps.DishesSelectionSteps;
 import test.e2e.steps.OrderSteps;
+
 import utils.DataLoader;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import static org.jbehave.core.reporters.Format.CONSOLE;
-import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
 public class BaseStory extends JUnitStories {
     private static final String SELENIUM_VERSION = DataLoader.getWebDriverVersion();
@@ -80,8 +84,8 @@ public class BaseStory extends JUnitStories {
                     .usingAnyFreePort()
                     .build();
             service.start();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
 
         browser = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
@@ -114,7 +118,8 @@ public class BaseStory extends JUnitStories {
 
     @Override
     public final List<String> storyPaths() {
-        return new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("src/test/resources/"), storyPath, "");
+        URL codeLocation = CodeLocations.codeLocationFromPath("src/test/resources/");
+        return new StoryFinder().findPaths(codeLocation, storyPath, "");
     }
 
     @Override

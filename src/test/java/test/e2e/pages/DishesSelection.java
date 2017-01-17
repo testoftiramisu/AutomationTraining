@@ -3,6 +3,8 @@ package test.e2e.pages;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PriceConverter;
 
 import java.util.List;
@@ -62,7 +64,10 @@ public class DishesSelection extends BasePage {
 
     public void emptyCart() {
         try {
+            WebElement emptyCartButton = new WebDriverWait(getBrowser(), 10)
+                    .until(ExpectedConditions.elementToBeClickable(By.id("empty-cart")));
             emptyCartButton.click();
+            //getBrowser().findElement(By.id("empty-cart")).click();
         } catch (ElementNotVisibleException ex) {
             System.out.println("Empty Cart button is not visible" + ex);
         }

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.PriceConverter;
 
 import java.util.List;
@@ -35,7 +36,6 @@ public class Order extends BasePage {
     }
 
     public void cancelOrder() {
-
         try {
             cancelOrderButton.click();
         } catch (ElementNotVisibleException ex) {

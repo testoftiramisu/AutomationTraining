@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.List;
 
 import org.jbehave.core.configuration.Configuration;
+import org.jbehave.core.embedder.EmbedderControls;
 import org.jbehave.core.embedder.StoryControls;
 import org.jbehave.core.failures.FailingUponPendingStep;
 import org.jbehave.core.failures.FailureStrategy;
@@ -56,7 +57,7 @@ public class BaseStory extends JUnitStories {
 
     private String storyPath;
     private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
-    private CrossReference crossReference = new CrossReference().withJsonOnly();
+    private CrossReference crossReference = new CrossReference().withJsonOnly().withOutputAfterEachStory(true);
     private SeleniumContext seleniumContext = new SeleniumContext();
 
     private Format[] formats = new Format[]{
@@ -72,6 +73,8 @@ public class BaseStory extends JUnitStories {
             .withCrossReference(crossReference);
 
     public BaseStory() {
+        EmbedderControls embedderControls = configuredEmbedder().embedderControls();
+        embedderControls.doIgnoreFailureInView(true);
         configuredEmbedder().embedderControls();
     }
 

@@ -95,7 +95,7 @@ public class DishesSelection extends BasePage {
     }
 
     public boolean isCartPresent() {
-        return cart.isDisplayed();
+        return checkoutButton.isDisplayed();
     }
 
     public void addRandomDish() {

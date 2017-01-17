@@ -17,10 +17,11 @@ repositories {
 
 dependencies {
     testCompile "junit:junit:" + junit
-    compile "org.assertj:assertj-core:" + assertj
-    compile "org.jbehave:jbehave-core:" + jbehave
+    testCompile "org.assertj:assertj-core:" + assertj
+    testCompile "org.jbehave:jbehave-core:" + jbehave
     testCompile "org.seleniumhq.selenium:selenium-java:" + selenium
-    compile "org.jbehave.web:jbehave-web-selenium:" + jehaveWebSelenium
+    testCompile "org.jbehave.web:jbehave-web-selenium:" + jehaveWebSelenium
+    testCompile 'org.jbehave.site:jbehave-site-resources:3.1.1:@zip'
 }
 
 test {
@@ -33,4 +34,47 @@ test {
     }
 
     exclude '**/BaseStory.class'
+}
+
+task(type: Test, 'bddTest') {
+    description 'Runs the BDD tests'
+
+    // Use properties for filtering stories
+    systemProperty "metaFilters", System.getProperty("filter", "")
+    systemProperty "story", System.getProperty("story", "*")
+
+    /*
+     * JBehave requires the Maven's "target" folder in order
+     * to obtain the absolute path from relative path.
+     */
+    doFirst {
+        file('target').mkdirs();
+
+        copy {
+            from(zipTree(jarPath("jbehave-core"))) {
+                include "style/*"
+            }
+            into("build/classes/jbehave/view")
+
+        }
+        copy {
+            from(zipTree(jarPath("jbehave-site-resources"))) {
+                include "js/**/*"
+                include "style/**/*"
+                include "images/*"
+            }
+            into("build/classes/jbehave/view")
+        }
+
+    }
+
+    doLast {
+        file('target').delete();
+    }
+
+    exclude '**/BaseStory.class'
+}
+
+def jarPath(String jarName) {
+    configurations.testCompile.find({ it.name.startsWith(jarName) }).absolutePath
 }

@@ -1,0 +1,10 @@
+language: java
+jdk:
+- oraclejdk8
+before_install:
+- export | grep SAUCE_
+script: gradle clean e2e
+env:
+  global:
+  - BUILD_TAG=$TRAVIS_REPO_SLUG+$TRAVIS_BUILD_NUMBER
+  - SAUCE_USERNAME=testoftiramisu

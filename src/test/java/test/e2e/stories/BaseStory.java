@@ -5,6 +5,7 @@ import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -46,6 +47,11 @@ public class BaseStory extends JUnitStories {
     private static WebDriver browser;
     private static String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver";
 
+
+    private static final String USERNAME = System.getenv("SAUCE_USERNAME");
+    private static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
+    private static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+
     static {
         if (System.getProperty("os.name").startsWith("Windows")) {
             CHROME_DRIVER_PATH += ".exe";
@@ -77,6 +83,25 @@ public class BaseStory extends JUnitStories {
 
     @BeforeClass
     public static void createAndStartService() {
+        startSauceLabsWebDriver();
+        //startLocalChromeDriver();
+    }
+
+    private static void startSauceLabsWebDriver() {
+        DesiredCapabilities caps = DesiredCapabilities.chrome();
+        caps.setCapability("platform", "Windows XP");
+        caps.setCapability("version", "43.0");
+
+        try {
+            browser = new RemoteWebDriver(new URL(URL), caps);
+        } catch (MalformedURLException ex) {
+            ex.printStackTrace();
+        }
+
+        browser.manage().window().maximize();
+    }
+
+    private static void startLocalChromeDriver() {
         ChromeDriverService service;
         try {
             service = new ChromeDriverService.Builder()
@@ -89,7 +114,6 @@ public class BaseStory extends JUnitStories {
         }
 
         browser = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
-        browser.manage().window().maximize();
     }
 
     public static WebDriver getBrowser() {

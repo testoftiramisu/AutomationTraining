@@ -17,6 +17,15 @@ public class DishesSelection extends BasePage {
     @FindBy(xpath = ".//button")
     private List<WebElement> addToCartButtons;
 
+    @FindBy(className = "selected-image-price")
+    private List<WebElement> dishesInCart;
+
+    @FindBy(xpath = ".//*[contains(@data-bind,'itemPrice')]")
+    private List<WebElement> pricesInCart;
+
+    @FindBy(xpath = ".//*[contains(@data-bind,'quantity')]")
+    private List<WebElement> quantitiesInCart;
+
     @FindBy(id = "checkout")
     private WebElement checkoutButton;
 
@@ -26,17 +35,8 @@ public class DishesSelection extends BasePage {
     @FindBy(className = "total-price")
     private WebElement totalPrice;
 
-    @FindBy(className = "selected-image-price")
-    private List<WebElement> dishesInCart;
-
     @FindBy(id = "shop-info")
     private WebElement cart;
-
-    @FindBy(xpath = ".//*[contains(@data-bind,'itemPrice')]")
-    private List<WebElement> pricesInCart;
-
-    @FindBy(xpath = ".//*[contains(@data-bind,'quantity')]")
-    private List<WebElement> quantitiesInCart;
 
     public DishesSelection(WebDriver browser) {
         super(browser);
@@ -53,28 +53,12 @@ public class DishesSelection extends BasePage {
                 .forEach(dish -> dish.findElement(By.xpath("../..")).findElement(By.className("add-to-cart")).click());
     }
 
-    public void checkout() {
+    public void addRandomDish() {
         try {
-            checkoutButton.click();
-        } catch (ElementNotVisibleException ex) {
-            System.out.println("Checkout button is not visible" + ex);
+            addToCartButtons.get(0).click();
+        } catch (NotFoundException elementIsNotFound) {
+            System.out.println("There are no dishes on a page: " + elementIsNotFound);
         }
-
-    }
-
-    public void emptyCart() {
-        try {
-            WebElement emptyCartButton = new WebDriverWait(getBrowser(), 10)
-                    .until(ExpectedConditions.elementToBeClickable(By.id("empty-cart")));
-            emptyCartButton.click();
-            //getBrowser().findElement(By.id("empty-cart")).click();
-        } catch (ElementNotVisibleException ex) {
-            System.out.println("Empty Cart button is not visible" + ex);
-        }
-    }
-
-    public double getTotalPrice() {
-        return PriceConverter.getTotalPriceAsDouble(totalPrice);
     }
 
     public double calculateTotalPrice() {
@@ -86,8 +70,26 @@ public class DishesSelection extends BasePage {
         return totalPrice;
     }
 
-    public boolean isTotalPricePresent() {
-        return totalPrice.isDisplayed();
+    public void checkout() {
+        try {
+            checkoutButton.click();
+        } catch (ElementNotVisibleException ex) {
+            System.out.println("Checkout button is not visible" + ex);
+        }
+    }
+
+    public void emptyCart() {
+        try {
+            WebElement emptyCartButton = new WebDriverWait(getBrowser(), 10)
+                    .until(ExpectedConditions.elementToBeClickable(By.id("empty-cart")));
+            emptyCartButton.click();
+        } catch (ElementNotVisibleException ex) {
+            System.out.println("Empty Cart button is not visible" + ex);
+        }
+    }
+
+    public double getTotalPrice() {
+        return PriceConverter.getTotalPriceAsDouble(totalPrice);
     }
 
     public List<WebElement> getDishesInCart() {
@@ -98,13 +100,11 @@ public class DishesSelection extends BasePage {
         return checkoutButton.isDisplayed();
     }
 
-    public void addRandomDish() {
-        try {
-            addToCartButtons.get(0).click();
-        } catch (NotFoundException elementIsNotFound) {
-            System.out.println("There are no dishes on a page: " + elementIsNotFound);
-        }
+    public boolean isTotalPricePresent() {
+        return totalPrice.isDisplayed();
     }
+
+
 
 
 }

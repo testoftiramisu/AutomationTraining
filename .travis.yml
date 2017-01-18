@@ -3,7 +3,6 @@ jdk:
 - oraclejdk8
 before_install:
 - export | grep SAUCE_
-- chmod +x gradlew
 script: gradle clean e2e
 env:
   global:

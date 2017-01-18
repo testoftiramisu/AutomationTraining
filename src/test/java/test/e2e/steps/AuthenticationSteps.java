@@ -1,16 +1,16 @@
 package test.e2e.steps;
 
+import org.jbehave.core.annotations.Given;
 import test.e2e.stories.BaseStory;
 import utils.DataLoader;
-import org.jbehave.core.annotations.Given;
 
 public class AuthenticationSteps {
 
-    private String landingURL = DataLoader.getLandingURL();
+    private String landingUrl = DataLoader.getLandingURL();
 
     @Given("I would like to eat Japanese food")
     public void login() {
-        BaseStory.getBrowser().get(landingURL);
+        BaseStory.getBrowser().get(landingUrl);
     }
 
 }

@@ -12,9 +12,7 @@ import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.embedder.EmbedderControls;
 import org.jbehave.core.embedder.StoryControls;
 import org.jbehave.core.failures.FailingUponPendingStep;
-import org.jbehave.core.failures.FailureStrategy;
 import org.jbehave.core.failures.PendingStepStrategy;
-import org.jbehave.core.failures.SilentlyAbsorbingFailure;
 import org.jbehave.core.io.CodeLocations;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryFinder;
@@ -35,7 +33,6 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import test.e2e.steps.AuthenticationSteps;
-import test.e2e.steps.DishesDetailsSteps;
 import test.e2e.steps.DishesSelectionSteps;
 import test.e2e.steps.OrderSteps;
 
@@ -138,7 +135,6 @@ public class BaseStory extends JUnitStories {
     public InjectableStepsFactory stepsFactory() {
         return new InstanceStepsFactory(configuration(),
                 new AuthenticationSteps(),
-                new DishesDetailsSteps(),
                 new DishesSelectionSteps(),
                 new OrderSteps()
         );

@@ -65,7 +65,6 @@ task(type: Test, 'e2e') {
             }
             into("build/classes/jbehave/view")
         }
-
     }
 
     doLast {

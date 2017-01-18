@@ -21,8 +21,8 @@ public class BasePage {
         try {
             long timeoutInMilliseconds = 1000;
             Thread.sleep(timeoutInMilliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
 }

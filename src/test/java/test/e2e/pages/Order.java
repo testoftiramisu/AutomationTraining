@@ -1,14 +1,13 @@
 package test.e2e.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.PriceConverter;
-
-import java.util.List;
 
 public class Order extends BasePage {
 
@@ -57,7 +56,7 @@ public class Order extends BasePage {
 
     public boolean dishIsPresentInOrder(String dishName) {
         return dishNames.stream()
-            .filter(dish -> dish.getText().equalsIgnoreCase(dishName)).count() == 1;
+                .filter(dish -> dish.getText().equalsIgnoreCase(dishName)).count() == 1;
     }
 
     public double getTotalOrderPrice() {
@@ -66,12 +65,12 @@ public class Order extends BasePage {
 
     public double getDishPrice(String dishName) {
         return PriceConverter
-            .getTotalPriceAsDouble((WebElement) dishPrices.get(getDishIndexByDishName(dishName)));
+                .getTotalPriceAsDouble((WebElement) dishPrices.get(getDishIndexByDishName(dishName)));
     }
 
     public double getDishQuantity(String dishName) {
         return Double.parseDouble(
-            dishQuantities.get(getDishIndexByDishName(dishName)).getAttribute("title"));
+                dishQuantities.get(getDishIndexByDishName(dishName)).getAttribute("title"));
     }
 
     public void setDishQuantity(int quantity, String dishName) {

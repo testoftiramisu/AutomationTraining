@@ -2,7 +2,7 @@ POC of Java based framework for E2E UI testing of http://demos.telerik.com/kendo
 
 This project is meant for educational purposes only. 
 
-[![Travis Status](https://travis-ci.org/saucelabs-sample-test-frameworks/Java-Junit-Selenium.svg?branch=master)](https://travis-ci.org/saucelabs-sample-test-frameworks/Java-Junit-Selenium)
+[![Travis Status](https://travis-ci.org/testoftiramisu/AutomationTraining.svg?branch=master)](https://travis-ci.org/testoftiramisu/AutomationTraining)
 
 
 #### Dependencies
@@ -38,18 +38,18 @@ This project is meant for educational purposes only.
 
 3. Local ChromeDriver configuration
 
-* Under 'utils' folder create a new directory, with name that match your ChromeDriver version (e.g. "2.27")
+    * Under 'utils' folder create a new directory, with name that match your ChromeDriver version (e.g. "2.27")
 
-* Download the latest version of ChromeDriver from:
+    * Download the latest version of ChromeDriver from:
   https://sites.google.com/a/chromium.org/chromedriver/downloads
 
-* Copy ChromeDriver executable to created folder.
+    * Copy ChromeDriver executable to created folder.
 
-* Update *ChromeDriverVersion* in **test.properties** file:
+    * Update *ChromeDriverVersion* in **test.properties** file:
 
-        ChromeDriverVersion = 2.27
+            ChromeDriverVersion = 2.27
         
-* Update *createAndStartService()* method in **BaseStory.class** in order to use local ChromeDriver
+    * Update *createAndStartService()* method in **BaseStory.class** in order to use local ChromeDriver
 
 #### Running
 

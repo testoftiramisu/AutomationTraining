@@ -1,7 +1,8 @@
----
 engines:
-  fixme:
+  checkstyle:
     enabled: true
+    channel: "beta"
+
 ratings:
-  paths: []
-exclude_paths: []
+  paths:
+  - "**.java"

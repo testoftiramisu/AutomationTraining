@@ -1,13 +1,9 @@
 language: java
-
 jdk:
 - oraclejdk8
-
 before_install:
 - export | grep SAUCE_
-
-before_script: - chmod +x gradlew
-
+- chmod +x gradlew
 script: gradle clean e2e
 env:
   global:

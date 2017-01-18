@@ -1,8 +1,5 @@
 package test.e2e.components;
 
-/**
- * Created by Anatolii_Hanziuk on 1/11/2017.
- */
 public class Dish {
 
     private String dishName;

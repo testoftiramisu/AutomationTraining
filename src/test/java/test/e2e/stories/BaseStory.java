@@ -1,14 +1,5 @@
 package test.e2e.stories;
 
-import static org.jbehave.core.reporters.Format.CONSOLE;
-import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
-
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.embedder.EmbedderControls;
 import org.jbehave.core.embedder.StoryControls;
@@ -36,21 +27,26 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import test.e2e.steps.AuthenticationSteps;
 import test.e2e.steps.DishesSelectionSteps;
 import test.e2e.steps.OrderSteps;
-
 import utils.DataLoader;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
+import static org.jbehave.core.reporters.Format.CONSOLE;
+import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
 public class BaseStory extends JUnitStories {
     private static final String SELENIUM_VERSION = DataLoader.getWebDriverVersion();
     private static final File CurrentPath = new File("");
     private static final File PROJECT_PATH = new File(CurrentPath.getAbsolutePath());
-
-    private static WebDriver browser;
-    private static String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver";
-
-
     private static final String USERNAME = System.getenv("SAUCE_USERNAME");
     private static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
     private static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+    private static WebDriver browser;
+    private static String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver";
 
     static {
         if (System.getProperty("os.name").startsWith("Windows")) {
@@ -83,8 +79,7 @@ public class BaseStory extends JUnitStories {
 
     @BeforeClass
     public static void createAndStartService() {
-      //  startSauceLabsWebDriver();
-        startLocalChromeDriver();
+        startSauceLabsWebDriver();
     }
 
     private static void startSauceLabsWebDriver() {

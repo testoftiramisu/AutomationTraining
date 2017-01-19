@@ -28,6 +28,7 @@ import test.e2e.steps.AuthenticationSteps;
 import test.e2e.steps.DishesSelectionSteps;
 import test.e2e.steps.OrderSteps;
 import utils.DataLoader;
+import utils.StoryPathConverter;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +55,6 @@ public class BaseStory extends JUnitStories {
         }
     }
 
-    private String storyPath;
     private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
     private CrossReference crossReference = new CrossReference().withJsonOnly().withOutputAfterEachStory(true);
     private SeleniumContext seleniumContext = new SeleniumContext();
@@ -137,8 +137,11 @@ public class BaseStory extends JUnitStories {
 
     @Override
     public final List<String> storyPaths() {
-        URL codeLocation = CodeLocations.codeLocationFromPath("src/test/resources/");
-        return new StoryFinder().findPaths(codeLocation, storyPath, "");
+        //URL codeLocation = CodeLocations.codeLocationFromPath("src/test/resources/");
+        String codeLocation = "src/test/resources/";
+        StoryPathConverter.convertStringToListOfStoryPathes(DataLoader.storiesToRun());
+        return new StoryFinder()
+                .findPaths(codeLocation, StoryPathConverter.convertStringToListOfStoryPathes(DataLoader.storiesToRun()), null);
     }
 
     @Override
@@ -157,10 +160,6 @@ public class BaseStory extends JUnitStories {
                 new DishesSelectionSteps(),
                 new OrderSteps()
         );
-    }
-
-    final void setStory(String story) {
-        this.storyPath = story;
     }
 }
 

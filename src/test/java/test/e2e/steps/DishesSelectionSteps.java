@@ -9,6 +9,8 @@ import org.jbehave.core.model.ExamplesTable;
 import test.e2e.pages.PageInitializer;
 import test.e2e.stories.BaseStory;
 
+import java.util.stream.IntStream;
+
 public class DishesSelectionSteps {
 
     private PageInitializer pageFactory = new PageInitializer(BaseStory.getBrowser());
@@ -25,9 +27,7 @@ public class DishesSelectionSteps {
 
     @Given("I add $dishesQuantity dish to a cart")
     public void addRandomDishes(int dishesQunatity) {
-        for (int i = 0; i < dishesQunatity; i++) {
-            pageFactory.getDishesSelectionPage().addRandomDish();
-        }
+        IntStream.range(0, dishesQunatity).forEach(dish -> pageFactory.getDishesSelectionPage().addRandomDish());
     }
 
     @Given("I view order details")

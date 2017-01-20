@@ -56,9 +56,7 @@ public class BaseStory extends JUnitStories {
 
     private static WebDriver driver;
     private static String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver";
-
     private static String buildTag;
-
 
     private String browser;
     private String os;
@@ -127,15 +125,13 @@ public class BaseStory extends JUnitStories {
         LinkedList<String[]> browsers = new LinkedList<>();
 
         if (!RUN_LOCALLY) {
-//            browsers.add(new String[]{"Windows 10", "14.14393", "MicrosoftEdge", null, null});
             browsers.add(new String[]{"Windows 10", "49.0", "firefox", null, null});
-//            browsers.add(new String[]{"Windows 7", "11.0", "internet explorer", null, null});
-//            browsers.add(new String[]{"OS X 10.11", "10.0", "safari", null, null});
+            //   browsers.add(new String[]{"Windows 7", "11.0", "internet explorer", null, null});   Currently fails
+            browsers.add(new String[]{"OS X 10.11", "10.0", "safari", null, null});
             browsers.add(new String[]{"OS X 10.10", "54.0", "chrome", null, null});
         } else {
             browsers.add(new String[]{null, null, null, null, null});
         }
-
         return browsers;
     }
 
@@ -150,7 +146,6 @@ public class BaseStory extends JUnitStories {
 
     private void startSauceLabsWebDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
         capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
         capabilities.setCapability(CapabilityType.VERSION, version);
         capabilities.setCapability("deviceName", deviceName);
@@ -213,8 +208,8 @@ public class BaseStory extends JUnitStories {
         }
     }
 
-    @AfterClass
-    public static void afterStory() throws Exception {
+    @After
+    public void afterStory() throws Exception {
         if (driver != null) {
             driver.quit();
         }

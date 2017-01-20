@@ -1,7 +1,6 @@
 package test.e2e.steps;
 
 import test.e2e.pages.Order;
-import test.e2e.stories.BaseStory;
 import test.e2e.pages.PageInitializer;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -12,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderSteps {
 
-    private PageInitializer pageFactory = new PageInitializer(BaseStory.getBrowser());
+    private PageInitializer pageFactory = new PageInitializer();
 
     @When("I view order details")
     public void getOrderDetails() {
@@ -37,7 +36,7 @@ public class OrderSteps {
     @Then("total order price should be equal to $orderTotalPrice")
     public void verifyTotalOrderPrice(String orderTotalPrice) {
         assertThat(Double.parseDouble(orderTotalPrice))
-            .isEqualTo(pageFactory.getOrderPage().calculateTotalOrderPrice());
+                .isEqualTo(pageFactory.getOrderPage().calculateTotalOrderPrice());
     }
 
     @Then("next dishes should be included to an order: $dishesInfo")

@@ -1,24 +1,30 @@
 package test.e2e.pages;
 
 import org.openqa.selenium.WebDriver;
+import test.e2e.stories.BaseStory;
 
 public class PageInitializer {
 
-    private final WebDriver browser;
+    private WebDriver driver;
 
-    public PageInitializer(WebDriver browser) {
-        this.browser = browser;
+    private void setDriver() {
+        if (driver == null) {
+            this.driver = BaseStory.getDriver();
+        }
     }
 
     public final DishDetails getDishesDetailsPage() {
-        return new DishDetails(browser);
+        setDriver();
+        return new DishDetails(driver);
     }
 
     public final DishesSelection getDishesSelectionPage() {
-        return new DishesSelection(browser);
+        setDriver();
+        return new DishesSelection(driver);
     }
 
     public final Order getOrderPage() {
-        return new Order(browser);
+        setDriver();
+        return new Order(driver);
     }
 }

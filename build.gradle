@@ -21,7 +21,8 @@ dependencies {
     testCompile "org.jbehave:jbehave-core:" + jbehave
     testCompile "org.seleniumhq.selenium:selenium-java:" + selenium
     testCompile "org.jbehave.web:jbehave-web-selenium:" + jehaveWebSelenium
-    testCompile 'org.jbehave.site:jbehave-site-resources:3.1.1:@zip'
+    testCompile "org.jbehave.site:jbehave-site-resources:3.1.1:@zip"
+    testCompile "com.saucelabs:saucerest:1.0.35"
 }
 
 test {

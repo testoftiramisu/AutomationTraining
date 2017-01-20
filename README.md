@@ -3,6 +3,9 @@ POC of Java based framework for E2E UI testing of http://demos.telerik.com/kendo
 This project is meant for educational purposes only. 
 
 [![Travis Status](https://travis-ci.org/testoftiramisu/AutomationTraining.svg?branch=master)](https://travis-ci.org/testoftiramisu/AutomationTraining)
+[![Build Status](https://saucelabs.com/buildstatus/testoftiramisu)](https://saucelabs.com/beta/builds/44741d9dea14443f84cd7151be2f7f58)
+
+[![Build Status](https://saucelabs.com/browser-matrix/testoftiramisu.svg)](https://saucelabs.com/beta/builds/44741d9dea14443f84cd7151be2f7f58)
 
 
 #### Dependencies

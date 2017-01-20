@@ -30,6 +30,9 @@ import org.jbehave.web.selenium.SeleniumContext;
 import org.jbehave.web.selenium.SeleniumContextOutput;
 import org.junit.*;
 import org.junit.rules.TestName;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
@@ -52,7 +55,7 @@ public class BaseStory extends JUnitStories {
     private static final String USERNAME = System.getenv("SAUCE_USERNAME");
     private static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
     private static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
-    private static final SauceREST sauceRest = new SauceREST(USERNAME, ACCESS_KEY);
+    private static final SauceREST sauceClient = new SauceREST(USERNAME, ACCESS_KEY);
 
     private static WebDriver driver;
     private static String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver";
@@ -166,6 +169,8 @@ public class BaseStory extends JUnitStories {
             ex.printStackTrace();
         }
 
+        this.sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
+
         driver.manage().window().maximize();
     }
 
@@ -238,8 +243,30 @@ public class BaseStory extends JUnitStories {
         );
     }
 
+    /**
+     * @return the value of the Sauce Job id.
+     */
+    public String getSessionId() {
+        return sessionId;
+    }
+
     final void setStory(String story) {
         this.storyPath = story;
     }
+
+    @Rule
+    public TestRule watcher = new TestWatcher() {
+
+        @Override
+        protected void failed(Throwable throwable, Description description) {
+            sauceClient.jobFailed(sessionId);
+            System.out.println(String.format("https://saucelabs.com/tests/%s", sessionId));
+        }
+
+        @Override
+        protected void succeeded(Description description) {
+            sauceClient.jobPassed(sessionId);
+        }
+    };
 }
 

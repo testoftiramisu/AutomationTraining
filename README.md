@@ -54,11 +54,15 @@ This project is meant for educational purposes only.
 
 #### Running
 
+```
 $ gradle clean e2e
+```
 
 or
 
+```
 $ gradle clean e2e --info
+```
 
 for observing the test output in console.
 

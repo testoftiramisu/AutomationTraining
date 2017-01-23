@@ -48,6 +48,7 @@ import test.e2e.steps.DishesSelectionSteps;
 import test.e2e.steps.OrderSteps;
 
 import utils.DataLoader;
+import utils.StoryPathConverter;
 
 @RunWith(Parameterized.class)
 public class BaseStory extends JUnitStories {
@@ -78,7 +79,6 @@ public class BaseStory extends JUnitStories {
         }
     }
 
-    private String storyPath;
     private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
     private CrossReference crossReference = new CrossReference().withJsonOnly();
     private SeleniumContext seleniumContext = new SeleniumContext();
@@ -241,8 +241,11 @@ public class BaseStory extends JUnitStories {
 
     @Override
     public final List<String> storyPaths() {
-        URL codeLocation = CodeLocations.codeLocationFromPath("src/test/resources/");
-        return new StoryFinder().findPaths(codeLocation, storyPath, "");
+        //URL codeLocation = CodeLocations.codeLocationFromPath("src/test/resources/");
+        String codeLocation = "src/test/resources/";
+        StoryPathConverter.convertStringToListOfStoryPaths(DataLoader.storiesToRun());
+        return new StoryFinder()
+                .findPaths(codeLocation, StoryPathConverter.convertStringToListOfStoryPaths(DataLoader.storiesToRun()), null);
     }
 
     @Override

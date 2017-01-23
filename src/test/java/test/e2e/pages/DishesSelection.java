@@ -60,7 +60,7 @@ public class DishesSelection extends BasePage {
         try {
             addToCartButtons.get(0).click();
         } catch (NotFoundException elementIsNotFound) {
-            System.out.println("There are no dishes on a page: " + elementIsNotFound);
+            System.err.println("There are no dishes on a page: " + elementIsNotFound);
         }
     }
 
@@ -77,7 +77,7 @@ public class DishesSelection extends BasePage {
         try {
             checkoutButton.click();
         } catch (ElementNotVisibleException ex) {
-            System.out.println("Checkout button is not visible" + ex);
+            System.err.println("Checkout button is not visible" + ex);
         }
     }
 
@@ -87,7 +87,7 @@ public class DishesSelection extends BasePage {
                     .until(ExpectedConditions.elementToBeClickable(By.id("empty-cart")));
             emptyCartButton.click();
         } catch (ElementNotVisibleException ex) {
-            System.out.println("Empty Cart button is not visible" + ex);
+            System.err.println("Empty Cart button is not visible" + ex);
         }
     }
 

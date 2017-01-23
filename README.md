@@ -7,7 +7,6 @@ This project is meant for educational purposes only.
 
 [![Build Status](https://saucelabs.com/browser-matrix/testoftiramisu.svg)](https://saucelabs.com/beta/builds/44741d9dea14443f84cd7151be2f7f58)
 
-
 #### Dependencies
 
     selenium = "2.49.0"

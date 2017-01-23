@@ -23,6 +23,10 @@ public final class DataLoader {
         return getProperty("runLocally").equals("true");
     }
 
+    public static String storiesToRun() {
+        return  getProperty("stories");
+    }
+
     private static String getProperty(String property) {
         if (properties == null) {
             InputStream inputStream = DataLoader.class.getResourceAsStream("test.properties");

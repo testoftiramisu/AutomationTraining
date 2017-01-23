@@ -38,7 +38,7 @@ public class Order extends BasePage {
         try {
             cancelOrderButton.click();
         } catch (ElementNotVisibleException ex) {
-            System.out.println("Cancel Order button is not visible" + ex);
+            System.err.println("Cancel Order button is not visible" + ex);
         }
     }
 
@@ -46,7 +46,7 @@ public class Order extends BasePage {
         try {
             orderNowButton.click();
         } catch (ElementNotVisibleException ex) {
-            System.out.println("Order Now button is not visible" + ex);
+            System.err.println("Order Now button is not visible" + ex);
         }
     }
 

@@ -34,7 +34,6 @@ test {
         file('target').delete();
     }
 
-    exclude '**/BaseStory.class'
 }
 
 task(type: Test, 'e2e') {
@@ -72,7 +71,6 @@ task(type: Test, 'e2e') {
         file('target').delete();
     }
 
-    exclude '**/BaseStory.class'
 }
 
 def jarPath(String jarName) {

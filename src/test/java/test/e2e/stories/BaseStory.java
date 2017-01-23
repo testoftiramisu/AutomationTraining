@@ -55,12 +55,14 @@ public class BaseStory extends JUnitStories {
     private static final String SELENIUM_VERSION = DataLoader.getWebDriverVersion();
     private static final File CurrentPath = new File("");
     private static final File PROJECT_PATH = new File(CurrentPath.getAbsolutePath());
-    private static final boolean RUN_LOCALLY = DataLoader.runLocally();
+    private static final boolean RUN_LOCALLY = DataLoader.isLocalRun();
 
     private static final String USERNAME = System.getenv("SAUCE_USERNAME");
     private static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
     private static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
     private static final SauceREST sauceClient = new SauceREST(USERNAME, ACCESS_KEY);
+    private static final List<String> storiesNames = StoryPathConverter
+            .convertStringToListOfStoryPaths(DataLoader.getStoriesToRun());
 
     private static WebDriver driver;
     private static String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver";
@@ -71,6 +73,7 @@ public class BaseStory extends JUnitStories {
     private String version;
     private String deviceName;
     private String deviceOrientation;
+
     public String sessionId;
 
     static {
@@ -110,7 +113,7 @@ public class BaseStory extends JUnitStories {
      * The order of the parameters should be the same as that of the elements within the
      * {@link #browsersStrings()} method.
      */
-    BaseStory(String os, String version, String browser, String device, String orientation) {
+    public BaseStory(String os, String version, String browser, String device, String orientation) {
 
         EmbedderControls embedderControls = configuredEmbedder().embedderControls();
         embedderControls.doIgnoreFailureInView(true);
@@ -163,7 +166,7 @@ public class BaseStory extends JUnitStories {
         capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("device-orientation", deviceOrientation);
         capabilities.setCapability(CapabilityType.PLATFORM, os);
-        capabilities.setCapability("name", os + ": " + browser + " " + storyPath);
+        capabilities.setCapability("name", os + ": " + browser + " " + DataLoader.getStoriesToRun());
 
         // Getting the build name.
         // Using the Jenkins ENV var. You can use your own.
@@ -241,11 +244,9 @@ public class BaseStory extends JUnitStories {
 
     @Override
     public final List<String> storyPaths() {
-        //URL codeLocation = CodeLocations.codeLocationFromPath("src/test/resources/");
         String codeLocation = "src/test/resources/";
-        StoryPathConverter.convertStringToListOfStoryPaths(DataLoader.storiesToRun());
         return new StoryFinder()
-                .findPaths(codeLocation, StoryPathConverter.convertStringToListOfStoryPaths(DataLoader.storiesToRun()), null);
+                .findPaths(codeLocation, storiesNames, null);
     }
 
     @Override
@@ -272,10 +273,6 @@ public class BaseStory extends JUnitStories {
      */
     public String getSessionId() {
         return sessionId;
-    }
-
-    final void setStory(String story) {
-        this.storyPath = story;
     }
 
     @Rule

@@ -19,7 +19,11 @@ public final class DataLoader {
         return getProperty("landingURL");
     }
 
-    public static String storiesToRun() {
+    public static boolean isLocalRun() {
+        return getProperty("localRun").equals("true");
+    }
+
+    public static String getStoriesToRun() {
         return  getProperty("stories");
     }
 

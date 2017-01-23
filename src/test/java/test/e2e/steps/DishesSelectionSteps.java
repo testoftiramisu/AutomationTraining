@@ -7,13 +7,18 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import test.e2e.pages.PageInitializer;
-import test.e2e.stories.BaseStory;
+import utils.DataLoader;
 
 import java.util.stream.IntStream;
 
 public class DishesSelectionSteps {
 
-    private PageInitializer pageFactory = new PageInitializer(BaseStory.getBrowser());
+    private PageInitializer pageFactory = new PageInitializer();
+
+    @Given("I would like to eat Japanese food")
+    public void navigateToLandingPage() {
+        pageFactory.getDishesSelectionPage().navigate(DataLoader.getLandingURL());
+    }
 
     @Given("next dishes are added to a cart: $dishesInfo")
     @When("I add next dishes to a cart: $dishesInfo")

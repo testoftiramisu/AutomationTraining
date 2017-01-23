@@ -42,6 +42,10 @@ public class DishesSelection extends BasePage {
         org.openqa.selenium.support.PageFactory.initElements(browser, this);
     }
 
+    public void navigate(String url) {
+        getBrowser().get(url);
+    }
+
     public void viewDishDetails(String dishName) {
         dishes.stream().filter(dish -> dish.getText().equals(dishName)).forEach(WebElement::click);
     }
@@ -102,8 +106,6 @@ public class DishesSelection extends BasePage {
     public boolean isTotalPricePresent() {
         return totalPrice.isDisplayed();
     }
-
-
 
 
 }

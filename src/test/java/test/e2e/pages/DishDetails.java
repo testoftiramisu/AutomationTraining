@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class DishDetails extends BasePage {
 
-    private String dishParameterValueXpath = ".//*[text()='%s']/following-sibling::dd[1]";
+    private final String dishParameterValueXpath = ".//*[text()='%s']/following-sibling::dd[1]";
 
     @FindBy(xpath = ".//*[@id='description']/h1")
     private WebElement dishName;

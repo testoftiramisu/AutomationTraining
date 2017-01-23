@@ -3,6 +3,8 @@ package test.e2e.stories;
 import static org.jbehave.core.reporters.Format.CONSOLE;
 import static org.jbehave.web.selenium.WebDriverHtmlOutput.WEB_DRIVER_HTML;
 
+import com.saucelabs.saucerest.SauceREST;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -10,7 +12,6 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.saucelabs.saucerest.SauceREST;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.embedder.EmbedderControls;
 import org.jbehave.core.embedder.StoryControls;
@@ -28,7 +29,10 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.web.selenium.SeleniumConfiguration;
 import org.jbehave.web.selenium.SeleniumContext;
 import org.jbehave.web.selenium.SeleniumContextOutput;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
@@ -66,8 +70,7 @@ public class BaseStory extends JUnitStories {
     private String version;
     private String deviceName;
     private String deviceOrientation;
-    protected String sessionId;
-    private boolean passed = true;
+    public String sessionId;
 
     static {
         if (System.getProperty("os.name").startsWith("Windows")) {
@@ -76,7 +79,6 @@ public class BaseStory extends JUnitStories {
     }
 
     private String storyPath;
-
     private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
     private CrossReference crossReference = new CrossReference().withJsonOnly();
     private SeleniumContext seleniumContext = new SeleniumContext();
@@ -102,11 +104,13 @@ public class BaseStory extends JUnitStories {
 
 
     /**
-     * Constructs a new instance of the test.  The constructor requires three string parameters, which represent the operating
-     * system, version and browser to be used when launching a Sauce VM.  The order of the parameters should be the same
-     * as that of the elements within the {@link #browsersStrings()} method.
+     * Constructs a new instance of the test.
+     * Constructor requires three string parameters, which represent the operating system, version
+     * and browser to be used when launching a Sauce VM.
+     * The order of the parameters should be the same as that of the elements within the
+     * {@link #browsersStrings()} method.
      */
-    BaseStory(String os, String version, String browser, String deviceName, String deviceOrientation) {
+    BaseStory(String os, String version, String browser, String device, String orientation) {
 
         EmbedderControls embedderControls = configuredEmbedder().embedderControls();
         embedderControls.doIgnoreFailureInView(true);
@@ -115,13 +119,15 @@ public class BaseStory extends JUnitStories {
         this.os = os;
         this.version = version;
         this.browser = browser;
-        this.deviceName = deviceName;
-        this.deviceOrientation = deviceOrientation;
+        this.deviceName = device;
+        this.deviceOrientation = orientation;
     }
 
     /**
-     * @return a LinkedList containing String arrays representing the browser combinations the test should be run against.
+     * Representing the browser combinations the test should be run against.
      * The values in the String array are used as part of the invocation of the test constructor.
+     *
+     * @return a LinkedList containing String arrays,
      */
     @Parameterized.Parameters
     public static LinkedList browsersStrings() {
@@ -129,7 +135,7 @@ public class BaseStory extends JUnitStories {
 
         if (!RUN_LOCALLY) {
             browsers.add(new String[]{"Windows 10", "49.0", "firefox", null, null});
-            //   browsers.add(new String[]{"Windows 7", "11.0", "internet explorer", null, null});   Currently fails
+            //   browsers.add(new String[]{"Windows 7", "11.0", "internet explorer", null, null});
             browsers.add(new String[]{"OS X 10.11", "10.0", "safari", null, null});
             browsers.add(new String[]{"OS X 10.10", "54.0", "chrome", null, null});
         } else {
@@ -138,6 +144,9 @@ public class BaseStory extends JUnitStories {
         return browsers;
     }
 
+    /**
+     * Perform setup of local ChromeDriver in case of running Test Suite locally.
+     */
     @BeforeClass
     public static void createAndStartService() {
         buildTag = System.getenv("BUILD_TAG");
@@ -193,6 +202,10 @@ public class BaseStory extends JUnitStories {
         return driver;
     }
 
+
+    /**
+     * Initial environment SetUp in case of running test suite on SauceLabs.
+     */
     @Before
     public final void setUp() {
         if (!RUN_LOCALLY) {
@@ -200,6 +213,9 @@ public class BaseStory extends JUnitStories {
         }
     }
 
+    /**
+     * Perform clean of target/jbehave directory before test run.
+     */
     @Before
     public final void clean() throws IOException {
         try {
@@ -213,6 +229,9 @@ public class BaseStory extends JUnitStories {
         }
     }
 
+    /**
+     * Web browser should be closed after run of every story.
+     */
     @After
     public void afterStory() throws Exception {
         if (driver != null) {
@@ -244,6 +263,8 @@ public class BaseStory extends JUnitStories {
     }
 
     /**
+     * In case you need value of SauceLabs job id, this method will
+     *
      * @return the value of the Sauce Job id.
      */
     public String getSessionId() {

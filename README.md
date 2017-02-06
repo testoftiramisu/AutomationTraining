@@ -27,7 +27,8 @@ This project is meant for educational purposes only.
 1. Make sure Java 8 SDK is installed and configured (path to Java bin folder is added to PATH environment variable on Windows)
 
 2. Install Gradle:
-    * Download [Gradle](https://gradle.org/gradle-download/) and follow installation instructions. For MacOS users: install Gradle with [Homebrew](http://brew.sh/):
+    * Download [Gradle](https://gradle.org/gradle-download/) and follow installation instructions. MacOS users could install Gradle with [Homebrew](http://brew.sh/):
+    
         ```
         $ brew install gradle
         ``` 
@@ -70,7 +71,7 @@ This project is meant for educational purposes only.
         $ gradle clean e2e
         ```
 
-    * you can use --info key for observing the test output in console:
+    * you can use --info key for observing the test output:
 
         ```
         $ gradle clean e2e --info

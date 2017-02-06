@@ -9,7 +9,8 @@ def selenium = "2.49.0"
 def assertj = "3.6.1"
 def jbehave = "4.0.5"
 def junit = "4.11"
-def jehaveWebSelenium = "3.5.5"
+def jbehaveWebSelenium = "3.5.5"
+def sauceRest = "1.0.35"
 
 repositories {
     mavenCentral()
@@ -20,9 +21,9 @@ dependencies {
     testCompile "org.assertj:assertj-core:" + assertj
     testCompile "org.jbehave:jbehave-core:" + jbehave
     testCompile "org.seleniumhq.selenium:selenium-java:" + selenium
-    testCompile "org.jbehave.web:jbehave-web-selenium:" + jehaveWebSelenium
+    testCompile "org.jbehave.web:jbehave-web-selenium:" + jbehaveWebSelenium
     testCompile "org.jbehave.site:jbehave-site-resources:3.1.1:@zip"
-    testCompile "com.saucelabs:saucerest:1.0.35"
+    testCompile "com.saucelabs:saucerest:" + sauceRest
 }
 
 test {

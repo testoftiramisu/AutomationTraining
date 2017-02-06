@@ -14,6 +14,7 @@ This project is meant for educational purposes only.
     jbehave = "4.0.5"
     junit = "4.11"
     jehaveWebSelenium = "3.5.5"
+    sauceRest = "1.0.35"
 
 #### System requirements
 
@@ -23,25 +24,31 @@ This project is meant for educational purposes only.
 
 ### Environment Setup
 
-1. Global Dependencies
-    * Download [Gradle](https://gradle.org/gradle-download/) and follow installation instructions or install Gradle with [Homebrew] (http://brew.sh/) (for MacOS):
-    ```
-    $ brew install gradle
-    ``` 
-2. Sauce Labs Credentials
+1. Make sure Java 8 SDK is installed and configured (path to Java bin folder is added to PATH environment variable on Windows)
+
+2. Install Gradle:
+    * Download [Gradle](https://gradle.org/gradle-download/) and follow installation instructions. For MacOS users: install Gradle with [Homebrew](http://brew.sh/):
+        ```
+        $ brew install gradle
+        ``` 
+2. Sauce Labs Credentials: 
+
+    Use your sauce credentials or register a new user on [saucelabs.com](https://saucelabs.com/).
+    Add sauce credentials to environment variables:
+   
     * For Windows: add two new Environment Variables (restart required)
 
     * For *nix: in terminal, export your Sauce Labs credentials as environmental variables:
-    ```
-    $ export SAUCE_USERNAME=<your Sauce Labs username>
-    $ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
-    ```
+        ```
+        $ export SAUCE_USERNAME=<your Sauce Labs username>
+        $ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
+        ```
 
-3. Local ChromeDriver configuration
-
-    * Under 'utils' folder create a new directory, with name that matches your ChromeDriver version (e.g. "2.27")
+3. In order to use local ChromeDriver, use next configuration:
 
     * Download the latest version of ChromeDriver from: https://sites.google.com/a/chromium.org/chromedriver/downloads
+    
+    * Under 'utils' folder create a new directory, with name that matches your ChromeDriver version (e.g. "2.27")
 
     * Copy ChromeDriver executable to created folder.
 
@@ -49,21 +56,27 @@ This project is meant for educational purposes only.
 
             ChromeDriverVersion = 2.27
         
-    * Update *createAndStartService()* method in **BaseStory.class** in order to use local ChromeDriver
+    * Set property *localRun* in **test.properties** file to *true*: 
+    
+            localRun = false
 
 #### Running
 
-```
-$ gradle clean e2e
-```
+* In terminal run Gradle from project root:
+       
+    * Use e2e target for running all tests:
+    
+        ```
+        $ gradle clean e2e
+        ```
 
-or
+    * you can use --info key for observing the test output in console:
 
-```
-$ gradle clean e2e --info
-```
+        ```
+        $ gradle clean e2e --info
+        ```
 
-for observing the test output in console.
+    
 
 #### Resources
 
@@ -76,5 +89,7 @@ for observing the test output in console.
 ##### [Java Documentation](https://docs.oracle.com/javase/7/docs/api/)
 
 ##### [jBehave Documentation](http://jbehave.org/reference/stable/)
+
+##### [Sauce Labs Documentation](https://wiki.saucelabs.com/)
 
 *This code is provided on an "AS-IS” basis without warranty of any kind, either express or implied, including without limitation any implied warranties of condition, uninterrupted use, merchantability, fitness for a particular purpose, or non-infringement. Your tests and testing environments may require you to modify this framework. Issues regarding this framework should be submitted through GitHub.*

@@ -6,24 +6,24 @@ import java.util.concurrent.TimeUnit;
 
 public class BasePage {
 
-    private WebDriver browser;
+  private WebDriver browser;
 
-    public final WebDriver getBrowser() {
-        return browser;
-    }
+  BasePage(WebDriver browser) {
+    this.browser = browser;
+    browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+  }
 
-    public BasePage(WebDriver browser) {
-        this.browser = browser;
-        browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    }
+  final WebDriver getBrowser() {
+    return browser;
+  }
 
-    public final void pause() {
-        try {
-            long timeoutInMilliseconds = 1000;
-            Thread.sleep(timeoutInMilliseconds);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
+  public final void pause() {
+    try {
+      long timeoutInMilliseconds = 1000;
+      Thread.sleep(timeoutInMilliseconds);
+    } catch (InterruptedException ex) {
+      ex.printStackTrace();
     }
+  }
 }
 

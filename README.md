@@ -26,56 +26,72 @@ This project is meant for educational purposes only.
 
 1. Make sure Java 8 SDK is installed and configured (path to Java bin folder is added to PATH environment variable on Windows)
 
-2. Install Gradle:
-    * Download [Gradle](https://gradle.org/gradle-download/) and follow installation instructions. MacOS users could install Gradle with [Homebrew](http://brew.sh/):
+2. Download dependencies:
+    * Download [Gradle](https://gradle.org/gradle-download/)
+    * Download the latest version of [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) 
     
-        ```
-        $ brew install gradle
-        ``` 
-2. Sauce Labs Credentials: 
-
-    Use your sauce credentials or register a new user on [saucelabs.com](https://saucelabs.com/).
-    Add sauce credentials to environment variables:
-   
-    * For Windows: add two new Environment Variables (restart required)
-
-    * For *nix: in terminal, export your Sauce Labs credentials as environmental variables:
-        ```
-        $ export SAUCE_USERNAME=<your Sauce Labs username>
-        $ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
-        ```
-
-3. In order to use local ChromeDriver, use next configuration:
-
-    * Download the latest version of ChromeDriver from: https://sites.google.com/a/chromium.org/chromedriver/downloads
+    For Mac users: 
+       
+    * Install Gradle with [Homebrew](http://brew.sh/) (for MacOS)
+    ```bash
+    $ brew install gradle
+    ```
     
-    * Under 'utils' folder create a new directory, with name that matches your ChromeDriver version (e.g. "2.27")
+    * Install ChromeDriver with Homebrew:
+    ```bash
+     $ brew install chromedriver
+     ```
+    
+3. Store Sauce Labs credentials:
+    * In the terminal, export your Sauce Labs credentials as environmental variables:
+    ```bash
+    $ export SAUCE_USERNAME=<your Sauce Labs username>
+    $ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
+    ```
+    
+    * or add two new Environment Variables if you using Windows (restart required).
 
+4. Local ChromeDriver configuration:
+
+   For running tests locally on Windows based environment: 
+
+    * Under 'utils' folder create a new directory, with name that match your ChromeDriver version (e.g. "2.27")
     * Copy ChromeDriver executable to created folder.
-
     * Update *ChromeDriverVersion* in **test.properties** file:
 
-            ChromeDriverVersion = 2.27
-        
-    * Set property *localRun* in **test.properties** file to *true*: 
+    ```
+    ChromeDriverVersion = 2.27
+    ```
     
-            localRun = false
+   On Mac: 
+   
+   * Feel free to use ChromeDriver installed by Homebrew. 
+   However, if you need specific ChromeDriver version, 
+   remove Chromedriver installed by Homebrew and follow set-up instruction for Windows. 
+   
+   ```bash
+   $ brew remove chromedriver
+   ```
 
 #### Running
 
-* In terminal run Gradle from project root:
-       
-    * Use e2e target for running all tests:
+```bash
+$ gradle clean e2e
+``` 
+
+Use --info flag for observing the test output in console:
+
+```bash
+$ gradle clean e2e --info
+```
     
-        ```
-        $ gradle clean e2e
-        ```
+#### Debug
 
-    * you can use --info key for observing the test output:
+Use flag --debug-jvm for running gradle task, then attach your IDE to process at address 5005:
 
-        ```
-        $ gradle clean e2e --info
-        ```  
+```bash
+$ gradle clean e2e --debug-jvm 
+```
 
 #### Resources
 

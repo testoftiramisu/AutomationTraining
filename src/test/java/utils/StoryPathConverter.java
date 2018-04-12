@@ -6,11 +6,10 @@ import java.util.List;
 
 public class StoryPathConverter {
 
-
   /**
-   * Convert property string with to list of story paths
+   * Converts property string with to list of story paths.
    *
-   * @return a List containing String values of Paths to stories.
+   * @return a List containing String values of Paths to stories
    */
   public static List<String> convertStringToListOfStoryPaths(String story) {
     List<String> storyPaths = new ArrayList<>();

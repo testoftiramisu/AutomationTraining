@@ -37,6 +37,4 @@ public class ShoppingCart extends BasePage {
   public String getTotalPrice() {
     return totalPrice.getText();
   }
-
-
 }

@@ -5,25 +5,36 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
-def selenium = "2.49.0"
-def assertj = "3.6.1"
-def jbehave = "4.0.5"
-def junit = "4.11"
-def jbehaveWebSelenium = "3.5.5"
-def sauceRest = "1.0.35"
+ext.selenium = "2.49.0"
+ext.assertj = "3.9.0"
+ext.jbehave = "4.0.5"
+ext.jbehaveWebSelenium = "3.5.5"
+ext.sauceRest = "1.0.35"
+ext.junitVintageVersion = '5.1.1'
+ext.junitPlatformVersion = '1.1.1'
+ext.junitJupiterVersion = '5.1.1'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile "junit:junit:" + junit
-    testCompile "org.assertj:assertj-core:" + assertj
-    testCompile "org.jbehave:jbehave-core:" + jbehave
-    testCompile "org.seleniumhq.selenium:selenium-java:" + selenium
-    testCompile "org.jbehave.web:jbehave-web-selenium:" + jbehaveWebSelenium
+    testCompile "org.assertj:assertj-core:${assertj}"
+    testCompile "org.jbehave:jbehave-core:${jbehave}"
+    testCompile "org.seleniumhq.selenium:selenium-java:${selenium}"
+    testCompile "org.jbehave.web:jbehave-web-selenium:${jbehaveWebSelenium}"
     testCompile "org.jbehave.site:jbehave-site-resources:3.1.1:@zip"
-    testCompile "com.saucelabs:saucerest:" + sauceRest
+    testCompile "com.saucelabs:saucerest:${sauceRest}"
+
+    // JUnit Jupiter API and TestEngine implementation
+    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+
+    // Allows JUnit 3 and JUnit 4 tests to run
+    testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
+
+    // Allows tests to run from IDEs that bundle older version of launcher
+    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
 }
 
 test {
@@ -71,7 +82,6 @@ task(type: Test, 'e2e') {
     doLast {
         file('target').delete();
     }
-
 }
 
 def jarPath(String jarName) {

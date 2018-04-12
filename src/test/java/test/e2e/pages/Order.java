@@ -55,8 +55,8 @@ public class Order extends BasePage {
   }
 
   public boolean dishIsPresentInOrder(String dishName) {
-    return dishNames.stream()
-        .filter(dish -> dish.getText().equalsIgnoreCase(dishName)).count() == 1;
+    return dishNames.stream().filter(dish -> dish.getText().equalsIgnoreCase(dishName)).count()
+        == 1;
   }
 
   public double getTotalOrderPrice() {
@@ -64,8 +64,7 @@ public class Order extends BasePage {
   }
 
   public double getDishPrice(String dishName) {
-    return PriceConverter
-        .getTotalPriceAsDouble((WebElement) dishPrices.get(getDishIndexByDishName(dishName)));
+    return PriceConverter.getTotalPriceAsDouble(dishPrices.get(getDishIndexByDishName(dishName)));
   }
 
   public double getDishQuantity(String dishName) {
@@ -90,4 +89,3 @@ public class Order extends BasePage {
     return -1;
   }
 }
-

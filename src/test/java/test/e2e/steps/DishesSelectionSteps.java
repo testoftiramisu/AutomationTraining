@@ -23,15 +23,19 @@ public class DishesSelectionSteps {
   @Given("next dishes are added to a cart: $dishesInfo")
   @When("I add next dishes to a cart: $dishesInfo")
   public void selectDishes(ExamplesTable dishesInfo) {
-    dishesInfo.getRowsAsParameters()
-        .forEach(row ->
-            pageFactory.getDishesSelectionPage()
-                .addDishToCart(row.valueAs("dish name", String.class)));
+    dishesInfo
+        .getRowsAsParameters()
+        .forEach(
+            row ->
+                pageFactory
+                    .getDishesSelectionPage()
+                    .addDishToCart(row.valueAs("dish name", String.class)));
   }
 
   @Given("I add $dishesQuantity dish to a cart")
   public void addRandomDishes(int dishesQunatity) {
-    IntStream.range(0, dishesQunatity).forEach(dish -> pageFactory.getDishesSelectionPage().addRandomDish());
+    IntStream.range(0, dishesQunatity)
+        .forEach(dish -> pageFactory.getDishesSelectionPage().addRandomDish());
   }
 
   @Given("I view order details")
@@ -58,8 +62,7 @@ public class DishesSelectionSteps {
 
   @Then("cart should be empty")
   public void isEmptyCart() {
-    assertThat(pageFactory.getDishesSelectionPage().isCartPresent())
-        .isFalse();
+    assertThat(pageFactory.getDishesSelectionPage().isCartPresent()).isFalse();
   }
 
   @Then("total cart price should be equal to $orderTotalPrice")

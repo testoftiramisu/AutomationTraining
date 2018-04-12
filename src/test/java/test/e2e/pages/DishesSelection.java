@@ -37,7 +37,7 @@ public class DishesSelection extends BasePage {
   @FindBy(id = "shop-info")
   private WebElement cart;
 
-  public DishesSelection(WebDriver browser) {
+  DishesSelection(WebDriver browser) {
     super(browser);
     org.openqa.selenium.support.PageFactory.initElements(browser, this);
   }
@@ -51,9 +51,14 @@ public class DishesSelection extends BasePage {
   }
 
   public void addDishToCart(String dishName) {
-    dishes.stream()
+    dishes
+        .stream()
         .filter(dish -> dish.getText().equalsIgnoreCase(dishName))
-        .forEach(dish -> dish.findElement(By.xpath("../..")).findElement(By.className("add-to-cart")).click());
+        .forEach(
+            dish ->
+                dish.findElement(By.xpath("../.."))
+                    .findElement(By.className("add-to-cart"))
+                    .click());
   }
 
   public void addRandomDish() {
@@ -67,8 +72,9 @@ public class DishesSelection extends BasePage {
   public double calculateTotalPrice() {
     double totalPrice = 0;
     for (int i = 0; i < dishesInCart.size(); i++) {
-      totalPrice += PriceConverter.getTotalPriceAsDouble(pricesInCart.get(i))
-          * PriceConverter.getTotalPriceAsDouble(quantitiesInCart.get(i));
+      totalPrice +=
+          PriceConverter.getTotalPriceAsDouble(pricesInCart.get(i))
+              * PriceConverter.getTotalPriceAsDouble(quantitiesInCart.get(i));
     }
     return totalPrice;
   }
@@ -83,8 +89,9 @@ public class DishesSelection extends BasePage {
 
   public void emptyCart() {
     try {
-      WebElement emptyCartButton = new WebDriverWait(getBrowser(), 10)
-          .until(ExpectedConditions.elementToBeClickable(By.id("empty-cart")));
+      WebElement emptyCartButton =
+          new WebDriverWait(getBrowser(), 10)
+              .until(ExpectedConditions.elementToBeClickable(By.id("empty-cart")));
       emptyCartButton.click();
     } catch (ElementNotVisibleException ex) {
       System.err.println("Empty Cart button is not visible" + ex);
@@ -106,6 +113,4 @@ public class DishesSelection extends BasePage {
   public boolean isTotalPricePresent() {
     return totalPrice.isDisplayed();
   }
-
-
 }

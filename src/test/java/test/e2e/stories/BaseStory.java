@@ -57,10 +57,11 @@ public class BaseStory extends JUnitStories {
 
   private static final String USERNAME = System.getenv("SAUCE_USERNAME");
   private static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
-  private static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+  private static final String URL =
+      "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
   private static final SauceREST sauceClient = new SauceREST(USERNAME, ACCESS_KEY);
-  private static final List<String> storiesNames = StoryPathConverter
-      .convertStringToListOfStoryPaths(DataLoader.getStoriesToRun());
+  private static final List<String> storiesNames =
+      StoryPathConverter.convertStringToListOfStoryPaths(DataLoader.getStoriesToRun());
 
   private static WebDriver driver;
   private static String CHROME_DRIVER_PATH = "/utils/" + SELENIUM_VERSION + "/chromedriver";
@@ -73,28 +74,30 @@ public class BaseStory extends JUnitStories {
   }
 
   @Rule
-  public TestName name = new TestName() {
-    public String getMethodName() {
-      return String.format("%s", super.getMethodName());
-    }
-  };
+  public TestName name =
+      new TestName() {
+        public String getMethodName() {
+          return String.format("%s", super.getMethodName());
+        }
+      };
 
   private String sessionId;
 
   @Rule
-  public TestRule watcher = new TestWatcher() {
+  public TestRule watcher =
+      new TestWatcher() {
 
-    @Override
-    protected void failed(Throwable throwable, Description description) {
-      sauceClient.jobFailed(sessionId);
-      System.out.println(String.format("https://saucelabs.com/tests/%s", sessionId));
-    }
+        @Override
+        protected void failed(Throwable throwable, Description description) {
+          sauceClient.jobFailed(sessionId);
+          System.out.println(String.format("https://saucelabs.com/tests/%s", sessionId));
+        }
 
-    @Override
-    protected void succeeded(Description description) {
-      sauceClient.jobPassed(sessionId);
-    }
-  };
+        @Override
+        protected void succeeded(Description description) {
+          sauceClient.jobPassed(sessionId);
+        }
+      };
 
   private String browser;
   private String os;
@@ -104,23 +107,22 @@ public class BaseStory extends JUnitStories {
   private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
   private CrossReference crossReference = new CrossReference().withJsonOnly();
   private SeleniumContext seleniumContext = new SeleniumContext();
-  private Format[] formats = new Format[] {
-      new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML
-  };
-  private StoryReporterBuilder reporterBuilder = new StoryReporterBuilder()
-      .withCodeLocation(CodeLocations.codeLocationFromClass(BaseStory.class))
-      .withFailureTrace(true)
-      .withFailureTraceCompression(true)
-      .withDefaultFormats()
-      .withFormats(formats)
-      .withCrossReference(crossReference);
+  private Format[] formats =
+      new Format[] {new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML};
+  private StoryReporterBuilder reporterBuilder =
+      new StoryReporterBuilder()
+          .withCodeLocation(CodeLocations.codeLocationFromClass(BaseStory.class))
+          .withFailureTrace(true)
+          .withFailureTraceCompression(true)
+          .withDefaultFormats()
+          .withFormats(formats)
+          .withCrossReference(crossReference);
 
   /**
-   * Constructs a new instance of the test.
-   * Constructor requires three string parameters, which represent the operating system, version
-   * and browser to be used when launching a Sauce VM.
-   * The order of the parameters should be the same as that of the elements within the
-   * {@link #browsersStrings()} method.
+   * Constructs a new instance of the test. Constructor requires three string parameters, which
+   * represent the operating system, version and browser to be used when launching a Sauce VM. The
+   * order of the parameters should be the same as that of the elements within the {@link
+   * #browsersStrings()} method.
    */
   public BaseStory(String os, String version, String browser, String device, String orientation) {
 
@@ -136,8 +138,8 @@ public class BaseStory extends JUnitStories {
   }
 
   /**
-   * Representing the browser combinations the test should be run against.
-   * The values in the String array are used as part of the invocation of the test constructor.
+   * Representing the browser combinations the test should be run against. The values in the String
+   * array are used as part of the invocation of the test constructor.
    *
    * @return a LinkedList containing String arrays,
    */
@@ -155,9 +157,7 @@ public class BaseStory extends JUnitStories {
     return browsers;
   }
 
-  /**
-   * Perform setup of local ChromeDriver in case of running Test Suite locally.
-   */
+  /** Perform setup of local ChromeDriver in case of running Test Suite locally. */
   @BeforeClass
   public static void createAndStartService() {
     buildTag = System.getenv("BUILD_TAG");
@@ -170,10 +170,11 @@ public class BaseStory extends JUnitStories {
   private static void startLocalChromeDriver() {
     ChromeDriverService service;
     try {
-      service = new ChromeDriverService.Builder()
-          .usingDriverExecutable(new File(PROJECT_PATH + CHROME_DRIVER_PATH))
-          .usingAnyFreePort()
-          .build();
+      service =
+          new ChromeDriverService.Builder()
+              .usingDriverExecutable(new File(PROJECT_PATH + CHROME_DRIVER_PATH))
+              .usingAnyFreePort()
+              .build();
       service.start();
     } catch (IOException ex) {
       throw new RuntimeException(ex);
@@ -213,9 +214,7 @@ public class BaseStory extends JUnitStories {
     driver.manage().window().maximize();
   }
 
-  /**
-   * Initial environment SetUp in case of running test suite on SauceLabs.
-   */
+  /** Initial environment SetUp in case of running test suite on SauceLabs. */
   @Before
   public final void setUp() {
     if (!RUN_LOCALLY) {
@@ -223,9 +222,7 @@ public class BaseStory extends JUnitStories {
     }
   }
 
-  /**
-   * Perform clean of target/jbehave directory before test run.
-   */
+  /** Perform clean of target/jbehave directory before test run. */
   @Before
   public final void clean() throws IOException {
     try {
@@ -239,9 +236,7 @@ public class BaseStory extends JUnitStories {
     }
   }
 
-  /**
-   * Web browser should be closed after run of every story.
-   */
+  /** Web browser should be closed after run of every story. */
   @After
   public void afterStory() throws Exception {
     if (driver != null) {
@@ -252,13 +247,13 @@ public class BaseStory extends JUnitStories {
   @Override
   public final List<String> storyPaths() {
     String codeLocation = "src/test/resources/";
-    return new StoryFinder()
-        .findPaths(codeLocation, storiesNames, null);
+    return new StoryFinder().findPaths(codeLocation, storiesNames, null);
   }
 
   @Override
   public final Configuration configuration() {
-    return new SeleniumConfiguration().useSeleniumContext(seleniumContext)
+    return new SeleniumConfiguration()
+        .useSeleniumContext(seleniumContext)
         .usePendingStepStrategy(pendingStepStrategy)
         .useStoryControls(new StoryControls().doResetStateBeforeScenario(false))
         .useStoryLoader(new LoadFromClasspath(BaseStory.class))
@@ -267,10 +262,7 @@ public class BaseStory extends JUnitStories {
 
   @Override
   public InjectableStepsFactory stepsFactory() {
-    return new InstanceStepsFactory(configuration(),
-        new DishesSelectionSteps(),
-        new OrderSteps()
-    );
+    return new InstanceStepsFactory(configuration(), new DishesSelectionSteps(), new OrderSteps());
   }
 
   /**
@@ -282,4 +274,3 @@ public class BaseStory extends JUnitStories {
     return sessionId;
   }
 }
-

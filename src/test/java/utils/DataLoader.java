@@ -8,21 +8,23 @@ public final class DataLoader {
 
   private static Properties properties = null;
 
-  private DataLoader() {
-  }
+  private DataLoader() {}
 
   public static String getWebDriverVersion() {
     return getProperty("ChromeDriverVersion");
   }
 
+  /** Returns value of landingURL property. */
   public static String getLandingURL() {
     return getProperty("landingURL");
   }
 
+  /** Returns true if localRun property is set to "true". */
   public static boolean isLocalRun() {
     return getProperty("localRun").equals("true");
   }
 
+  /** Returns a coma separated list of stories as a String. */
   public static String getStoriesToRun() {
     return getProperty("stories");
   }
@@ -42,5 +44,4 @@ public final class DataLoader {
 
     return properties.getProperty(property);
   }
-
 }

@@ -27,10 +27,8 @@ class DishDetails extends BasePage {
   @FindBy(id = "navigate-next")
   private WebElement nextDish;
 
-  public DishDetails(WebDriver browser) {
+  DishDetails(WebDriver browser) {
     super(browser);
     PageFactory.initElements(browser, this);
   }
-
-
 }
